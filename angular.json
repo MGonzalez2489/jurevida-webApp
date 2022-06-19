@@ -32,6 +32,11 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+                "includePaths": [
+                    "./src/theme"
+                ]
+            },
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

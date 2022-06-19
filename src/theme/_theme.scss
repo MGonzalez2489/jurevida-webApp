@@ -1,0 +1,26 @@
+@import "./color";
+@import "~@angular/material/theming";
+
+@function jurevida-foreground($color) {
+  @return (secondary-text: #fff);
+}
+
+$jurevida-typography: mat-typography-config(
+  $font-family: "Montserrat",
+);
+
+@include mat-core($jurevida-typography);
+
+$jurevida-primary: mat-palette($jurevida-psicologia, 800);
+$jurevida-accent: mat-palette($jurevida-medicina, 500);
+$jurevida-warn: mat-palette($jurevida-leyes, 500);
+
+$jurevida-theme: mat-light-theme(
+  $jurevida-primary,
+  $jurevida-accent,
+  $jurevida-warn
+);
+
+$my-foreground: jurevida-foreground(mat-color($jurevida-accent, 500));
+
+@include angular-material-theme($jurevida-theme);
