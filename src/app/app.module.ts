@@ -7,9 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import {SharedModule} from '@shared/_shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,8 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatButtonModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable

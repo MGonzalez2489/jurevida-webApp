@@ -1,0 +1,52 @@
+<div class="main-container" [class.is-mobile]="mobileQuery.matches">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      opened="true"
+      class="sidenav"
+    >
+      <div class="sidenav-content-header">
+        <div class="app-identity">
+          <img src="assets/Logo.png" />
+          <h1>Jurevida</h1>
+          <h4>Juntos Rescatando Vidas A.C.</h4>
+        </div>
+      </div>
+      <mat-list class="sidenav-content-menu">
+        <mat-nav-list>
+          <mat-list-item
+            class="menu-item"
+            *ngFor="
+              let menu of menuItems;
+              let i = index;
+              trackBy: trackByMenuItems
+            "
+            routerLinkActive="menu-item-active"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <div *ngIf="menu.isTitle" class="title">
+              <span>{{ menu.text }}</span>
+            </div>
+            <a *ngIf="!menu.isTitle" [routerLink]="menu.routerLink">
+              <div class="text">
+                <mat-icon>{{ menu.icon }}</mat-icon>
+                <span>{{ menu.text }}</span>
+              </div>
+            </a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <app-navbar (toggleSideBar)="snav.toggle()"></app-navbar>
+
+      <div class="sidenav-router">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

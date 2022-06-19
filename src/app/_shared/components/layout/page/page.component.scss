@@ -1,0 +1,94 @@
+@import "color";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.is-mobile {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+.sidenav {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: map-get($jurevida-psicologia, 800);
+  //aqui
+  .sidenav-content-menu {
+    .menu-item {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 20px;
+      text-decoration: none;
+      width: 100%;
+      border-radius: 3px;
+      color: rgb(255, 255, 255 /0.12);
+      ::ng-deep .mat-list-item-content {
+        width: 100%;
+      }
+      mat-icon {
+        opacity: 1;
+        margin-right: 16px;
+        color: currentColor;
+      }
+      a {
+        width: 100%;
+      }
+    }
+    .menu-item-active {
+      --tw-bg-opacity: 0.12;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    }
+    .title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: $j-medicina;
+      opacity: 1;
+    }
+    .text {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  .sidenav-router {
+    flex: 1;
+    background-color: $body-color !important;
+  }
+}
+
+.app-identity {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  img {
+    height: 230px;
+    width: 230px;
+  }
+}

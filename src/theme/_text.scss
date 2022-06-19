@@ -1,0 +1,21 @@
+@import "./color";
+
+.text-primary {
+  color: $j-psicologia;
+}
+.text-secondary {
+  color: $j-medicina;
+}
+.text-warning {
+  color: $j-leyes;
+}
+.text-danger {
+  color: $j-tsocial;
+}
+
+.text-muted {
+  color: rgba(33, 37, 41, 0.75) !important;
+}
+.text-center {
+  text-align: center;
+}
