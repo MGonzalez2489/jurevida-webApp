@@ -11,9 +11,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PageComponent } from './components/layout/page/page.component';
 import { RouterModule } from '@angular/router';
+import { StopPropagationDirective } from './directives/';
 
 @NgModule({
-  declarations: [NavbarComponent, PageComponent],
+  declarations: [NavbarComponent, PageComponent, StopPropagationDirective],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -24,5 +25,6 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     RouterModule,
   ],
+  exports: [StopPropagationDirective],
 })
 export class SharedModule {}
