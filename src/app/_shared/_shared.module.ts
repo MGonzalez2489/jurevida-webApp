@@ -12,11 +12,15 @@ import { MatListModule } from '@angular/material/list';
 import { PageComponent } from './components/layout/page/page.component';
 import { RouterModule } from '@angular/router';
 import { StopPropagationDirective } from './directives/';
+import {HttpClientModule} from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [NavbarComponent, PageComponent, StopPropagationDirective],
   imports: [
     CommonModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="container d-flex justify-content-center align-items-center">
+  <mat-card class="auth-card">
+    <div class="login-container">
+      <div class="logo-container">
+        <img src="assets/Logo.png" alt="jurevida.png" />
+      </div>
+      <div class="welcome-title">Bienvenido</div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            name="emailInp"
+            formControlName="email"
+          />
+          <mat-error *ngIf="form['email'].invalid"
+            >Formato de email incorrecto</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Contrasena</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="Contrasena"
+            name="passInp"
+            formControlName="password"
+          />
+        </mat-form-field>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <mat-checkbox formControlName="rememberMe">Recordarme</mat-checkbox>
+          <a href="" routerLink="reset-password" mat-rised-button
+            >Recuperar contrasena?</a
+          >
+        </div>
+
+        <div class="text-warning mt-5">
+          <!--{{ error }}-->
+        </div>
+        <button mat-raised-button color="primary" class="mt-5" type="submit">
+          Entrar
+        </button>
+      </form>
+    </div>
+    <div class="login-info">
+      <h1>Bienvenido a nuestra comunidad</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mi metus,
+        aliquam quis felis id, posuere ornare sem. Maecenas auctor eros vel
+        lobortis convallis. Suspendisse potenti. Sed sit amet orci at nunc
+        sollicitudin bibendum ut eget velit. Duis accumsan ipsum libero, quis
+        pellentesque metus faucibus ac. Maecenas sit amet quam gravida,
+        condimentum velit eget, eleifend nunc. Morbi nec imperdiet sapien.
+        Aenean in
+      </p>
+    </div>
+  </mat-card>
+</div>

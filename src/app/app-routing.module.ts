@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidateSessionGuard } from '@core/guards';
 import { PageComponent } from '@shared/components/layout/page/page.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: PageComponent,
+    canActivate: [ValidateSessionGuard],
     children: [
       {
         path: 'users',
@@ -19,7 +21,6 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
 ];
 
 @NgModule({
