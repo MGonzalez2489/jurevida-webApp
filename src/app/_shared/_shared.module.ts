@@ -12,10 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { PageComponent } from './components/layout/page/page.component';
 import { RouterModule } from '@angular/router';
 import { StopPropagationDirective } from './directives/';
-import {HttpClientModule} from '@angular/common/http';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [NavbarComponent, PageComponent, StopPropagationDirective],
   imports: [
@@ -28,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
     MatSidenavModule,
     MatListModule,
     RouterModule,
+    MatDialogModule,
   ],
   exports: [StopPropagationDirective],
 })
