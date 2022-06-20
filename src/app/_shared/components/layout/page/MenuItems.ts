@@ -1,6 +1,6 @@
-import { SideMenuItem } from '@shared/interfaces/layout';
+import { iSideMenuItem } from '@shared/interfaces/layout';
 
-export const MenuItems: SideMenuItem[] = [
+export const MenuItems: iSideMenuItem[] = [
   {
     isTitle: true,
     text: 'Opciones',

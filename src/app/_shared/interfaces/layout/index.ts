@@ -1,2 +1,2 @@
-export * from './side-menu-item';
-export * from './page';
+export * from './iSide-menu-item';
+export * from './iPage';

@@ -1,8 +1,8 @@
 import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { environment } from '@environment/environment';
-import { SideMenuItem } from '@shared/interfaces/layout';
 import { MenuItems } from './MenuItems';
+import { iSideMenuItem } from '@shared/interfaces/layout';
 
 @Component({
   selector: 'app-page',
@@ -11,7 +11,7 @@ import { MenuItems } from './MenuItems';
 })
 export class PageComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-  menuItems: Array<SideMenuItem> = MenuItems;
+  menuItems: Array<iSideMenuItem> = MenuItems;
   version = environment.appVersion;
   private _mobileQueryListener: () => void;
 

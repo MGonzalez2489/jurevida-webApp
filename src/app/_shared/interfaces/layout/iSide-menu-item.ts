@@ -1,8 +1,8 @@
-export interface SideMenuItem {
+export interface iSideMenuItem {
   isTitle: boolean;
   text: string;
   icon: string;
   routerLink: string;
-  children?: Array<SideMenuItem>;
+  children?: Array<iSideMenuItem>;
   disabled: boolean;
 }
