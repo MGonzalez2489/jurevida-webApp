@@ -7,5 +7,5 @@ export class BaseSearchCriteria {
   totalRecords: number = 0; // total count
   totalPages: number = 0; // total count of pages
   orderBy: string = '';
-  orderDir: string = '';
+  orderDir: string = 'asc';
 }

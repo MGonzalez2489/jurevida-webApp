@@ -37,6 +37,7 @@ export class SearchUserComponent implements OnInit {
   sort(event: Sort) {
     this.search.orderBy = event.active;
     this.search.orderDir = event.direction;
+    this.loadUsers();
   }
   changePage(event: PageEvent) {
     this.search.page = event.pageIndex + 1;
