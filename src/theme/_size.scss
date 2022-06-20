@@ -1,3 +1,16 @@
-.w-full{
-    width:100%;
+$desktop-size: 1440px;
+
+.w-full {
+  width: 100%;
+}
+
+.w-desktop {
+  width: $desktop-size;
+}
+
+.maw-desktop {
+  max-width: $desktop-size;
+}
+.miw-desktop {
+  min-width: $desktop-size;
 }

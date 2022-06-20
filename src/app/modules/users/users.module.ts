@@ -10,7 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { SharedModule } from '@shared/_shared.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [SearchUserComponent, CreateUserComponent, UpdateUserComponent],
   imports: [
@@ -21,6 +25,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatIconModule,
     MatTableModule,
     MatSidenavModule,
+    MatMenuModule,
+    MatSortModule,
+    MatCardModule,
+    SharedModule,
+    MatPaginatorModule,
   ],
 })
 export class UsersModule {}

@@ -1,12 +1,15 @@
 @import "./color";
 @import "~@angular/material/theming";
-
+//foreground
 @function jurevida-foreground($color) {
-  @return (secondary-text: #fff);
+  @return (text: $text-color);
 }
 
+$white-foreground: jurevida-foreground(white);
+
+//font
 $jurevida-typography: mat-typography-config(
-  $font-family: "Montserrat",
+  $font-family: '"Montserrat", sans-serif;',
 );
 
 @include mat-core($jurevida-typography);
@@ -21,6 +24,13 @@ $jurevida-theme: mat-light-theme(
   $jurevida-warn
 );
 
-$my-foreground: jurevida-foreground(mat-color($jurevida-accent, 500));
+$app-theme: map-merge(
+  $jurevida-theme,
+  (
+    foreground: $white-foreground,
+  )
+);
+@include angular-material-theme($app-theme);
 
-@include angular-material-theme($jurevida-theme);
+//$my-foreground: jurevida-foreground(mat-color($jurevida-accent, 500));
+//@include angular-material-theme($jurevida-theme);

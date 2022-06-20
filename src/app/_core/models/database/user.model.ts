@@ -6,6 +6,7 @@ import { SponsorProfileModel } from './sponsor-profile.model';
 export class UserModel extends BaseModel {
   firstName: string = '';
   lastName: string = '';
+  fullName: string = '';
   gender: string = '';
   email: string = '';
   phone: string = '';
