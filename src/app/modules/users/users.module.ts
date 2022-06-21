@@ -15,6 +15,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @NgModule({
   declarations: [SearchUserComponent, CreateUserComponent, UpdateUserComponent],
   imports: [
@@ -29,7 +32,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatCardModule,
     SharedModule,
+    MatListModule,
     MatPaginatorModule,
+    FormsModule,
+    MatButtonToggleModule,
   ],
 })
 export class UsersModule {}

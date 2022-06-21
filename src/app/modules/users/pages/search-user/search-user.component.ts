@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSelectionListChange } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { UserModel } from '@core/models/database';
 import { ResultListModel } from '@core/models/responses';
-import { BaseSearchCriteria } from '@core/models/searchCriteria';
+import { UserSearchCriteria } from '@core/models/searchCriteria';
 import { GLOBAL } from '@global/globals';
 import { UserService } from '../../services/user.service';
 
@@ -12,15 +14,30 @@ import { UserService } from '../../services/user.service';
   templateUrl: './search-user.component.html',
   styleUrls: ['./search-user.component.scss'],
 })
-export class SearchUserComponent implements OnInit {
+export class SearchUserComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['fullName', 'email', 'phone', 'options'];
-  search: BaseSearchCriteria = new BaseSearchCriteria();
+  search: UserSearchCriteria = new UserSearchCriteria();
   users: ResultListModel<UserModel> = new ResultListModel();
   global = GLOBAL;
-  constructor(private userService: UserService) {}
+  mobileQuery: MediaQueryList;
+
+  showFiller = true;
+  private _mobileQueryListener: () => void;
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private userService: UserService
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width:600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   loadUsers(): void {
@@ -42,6 +59,10 @@ export class SearchUserComponent implements OnInit {
   changePage(event: PageEvent) {
     this.search.page = event.pageIndex + 1;
     this.search.perPage = event.pageSize;
+    this.loadUsers();
+  }
+  filterType(event: MatSelectionListChange) {
+    this.search.profile = event.options[0].value;
     this.loadUsers();
   }
 }
