@@ -81,3 +81,31 @@
 .align-content-stretch {
   align-content: stretch;
 }
+
+.gap-d-1 {
+  gap: 0.25rem;
+}
+
+.gap-d-2 {
+  gap: 0.5rem;
+}
+.gap-d-3 {
+  gap: 0.75rem;
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .gap-d-1 {
+    gap: 0rem;
+  }
+  .gap-d-2 {
+    gap: 0rem;
+  }
+  .gap-d-3 {
+    gap: 0rem;
+  }
+
+  .m-flex-column {
+    flex-direction: column;
+  }
+}

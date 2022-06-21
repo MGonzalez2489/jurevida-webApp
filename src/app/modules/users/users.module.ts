@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { SearchUserComponent } from './pages/search-user/search-user.component';
-import { CreateUserComponent } from './pages/create-user/create-user.component';
-import { UpdateUserComponent } from './pages/update-user/update-user.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,10 +14,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatListModule } from '@angular/material/list';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { CreateCouncilComponent } from './pages/create-council/create-council.component';
+import { CreateSponsorComponent } from './pages/create-sponsor/create-sponsor.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
-  declarations: [SearchUserComponent, CreateUserComponent, UpdateUserComponent],
+  declarations: [SearchUserComponent, CreateCouncilComponent, CreateSponsorComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -35,7 +38,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatListModule,
     MatPaginatorModule,
     FormsModule,
-    MatButtonToggleModule,
-  ],
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatButtonToggleModule
+  ]
 })
 export class UsersModule {}

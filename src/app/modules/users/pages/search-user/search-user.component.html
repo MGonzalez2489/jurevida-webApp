@@ -3,8 +3,8 @@
   <div class="bg-card">
     <div class="w-desktop maw-desktop page-title-wrapper d-flex justify-content-between">
       <div class="page-title-content">
-        <div class="page-title">
-          <div class="d-hidden m-visible">
+        <div class="page-title d-flex align-items-center ">
+          <div class="d-hidden m-visible ps-3">
             <button mat-icon-button (click)="drawer.toggle()">
               <mat-icon>menu</mat-icon>
             </button>
@@ -13,16 +13,20 @@
         </div>
       </div>
       <div class="d-flex flex-row align-items-center pe-3">
-        <button mat-raised-button class="br-100" color="primary" routerLink="create">
+        <button mat-raised-button class="" color="primary" [matMenuTriggerFor]="createUserMenu">
           <mat-icon>add</mat-icon>
           <span class="m-hidden"> Nuevo Usuario </span>
         </button>
+        <mat-menu #createUserMenu="matMenu">
+          <button mat-menu-item routerLink="create-council">Miembro del Consejo</button>
+          <button mat-menu-item>Patrocinador</button>
+        </mat-menu>
       </div>
     </div>
   </div>
   <!--body-->
 
-  <div class="h-full d-flex justify-content-center">
+  <div class="page-body h-full d-flex justify-content-center">
     <mat-drawer-container class="h-full drawer-container" autosize>
       <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" class="left-side">
         <mat-selection-list class="list-options" multiple="false" (selectionChange)="filterType($event, drawer)">
@@ -86,7 +90,7 @@
                     <mat-icon>edit</mat-icon>
                     <span>Editar Usuario</span>
                   </button>
-                  <button mat-menu-item>
+                  <button mat-menu-item [disabled]="element.email == currentUser.email">
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar Usuario</span>
                   </button>

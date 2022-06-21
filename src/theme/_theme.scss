@@ -1,13 +1,13 @@
 @import './color';
 @import '~@angular/material/theming';
-//foreground
+///////foreground
+//white
+$white: #fff;
 @function jurevida-foreground($color) {
-  @return (text: $text-color);
+  @return (text: $text-color, accent-text: $white);
 }
-
 $white-foreground: jurevida-foreground(white);
 
-//font
 $jurevida-typography: mat-typography-config(
   $font-family: '"Montserrat", sans-serif;'
 );
@@ -30,3 +30,22 @@ $app-theme: map-merge(
 
 //$my-foreground: jurevida-foreground(mat-color($jurevida-accent, 500));
 //@include angular-material-theme($jurevida-theme);
+//
+.mat-form-field {
+  font-size: 0.74rem;
+
+  input {
+    font-size: 1rem;
+  }
+
+  label.mat-form-field-label {
+    font-size: 1rem;
+    top: 1.45em;
+  }
+
+  &.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+  &.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+    transform: translateY(-1.25em) scale(0.75);
+    width: 133.33333%;
+  }
+}

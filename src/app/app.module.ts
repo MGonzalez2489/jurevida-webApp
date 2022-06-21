@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {SharedModule} from '@shared/_shared.module';
+import { SharedModule } from '@shared/_shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '@core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,10 +22,10 @@ import {SharedModule} from '@shared/_shared.module';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

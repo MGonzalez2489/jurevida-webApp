@@ -34,10 +34,18 @@
   color: rgba(100, 116, 139, var(--tw-text-opacity)) !important;
 }
 
+.page-body {
+  padding: 0.5rem 1rem; //troguth
+}
+
 /* For Mobile Phones Portrait or Landscape View */
 @media screen and (max-device-width: 640px) {
-  .page-title-wrapper {
+  .page-title {
+    font-size: 1.3rem;
     padding-left: 1rem;
+  }
+  .page-title-wrapper {
+    padding-left: 0rem;
     padding-right: 0rem;
   }
   .page-title-content {

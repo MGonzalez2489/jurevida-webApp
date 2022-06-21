@@ -7,6 +7,7 @@ import { Sort } from '@angular/material/sort';
 import { UserModel } from '@core/models/database';
 import { ResultListModel } from '@core/models/responses';
 import { UserSearchCriteria } from '@core/models/searchCriteria';
+import { SessionService } from '@core/services';
 import { GLOBAL } from '@global/globals';
 import { UserService } from '../../services/user.service';
 
@@ -21,13 +22,14 @@ export class SearchUserComponent implements OnInit, OnDestroy {
   users: ResultListModel<UserModel> = new ResultListModel();
   global = GLOBAL;
   mobileQuery: MediaQueryList;
-
+  currentUser: UserModel;
   showFiller = true;
   private _mobileQueryListener: () => void;
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private userService: UserService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private userService: UserService, private sessionService: SessionService) {
     this.mobileQuery = media.matchMedia('(max-width:600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.currentUser = sessionService.getSessionUser()!;
   }
 
   ngOnInit(): void {

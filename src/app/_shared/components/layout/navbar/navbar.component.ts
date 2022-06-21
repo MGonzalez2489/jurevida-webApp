@@ -8,37 +8,22 @@ import { iPage } from '@shared/interfaces/layout';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   @Output()
   toggleSideBar: EventEmitter<any> = new EventEmitter();
 
   page: iPage = {
-    title: '',
+    title: ''
     //error: '',
   };
   user: UserModel = new UserModel();
 
-  constructor(
-    private sessionService: SessionService,
-    private router: Router,
-    private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute
-  ) {
+  constructor(private sessionService: SessionService, private router: Router, private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
     this.loadSessionInfo();
     this.sessionService.getCurrentSession().subscribe((data) => {
       this.user = data.user;
-    });
-    this.loadPageInfo();
-  }
-  loadPageInfo(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof ActivationEnd) {
-        if (event.snapshot.data && event.snapshot.data['title']) {
-          this.page.title = event.snapshot.data['title'];
-        }
-      }
     });
   }
   ngOnInit(): void {}
