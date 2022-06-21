@@ -6,6 +6,10 @@ $j-tsocial: #f86965;
 $body-color: #f1f5f9;
 $text-color: #1e293b;
 
+.bg-white {
+  background-color: #fff;
+}
+
 $jurevida-psicologia: (
   50: #eceef4,
   100: #cfd6e5,
@@ -36,8 +40,8 @@ $jurevida-psicologia: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #ffffff,
-  ),
+    A700: #ffffff
+  )
 );
 
 $jurevida-medicina: (
@@ -69,8 +73,8 @@ $jurevida-medicina: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000,
-  ),
+    A700: #000000
+  )
 );
 
 $jurevida-leyes: (
@@ -102,8 +106,8 @@ $jurevida-leyes: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000,
-  ),
+    A700: #000000
+  )
 );
 
 $jurevida-tsocial: (
@@ -135,6 +139,6 @@ $jurevida-tsocial: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000,
-  ),
+    A700: #000000
+  )
 );

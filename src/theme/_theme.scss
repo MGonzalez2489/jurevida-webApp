@@ -1,5 +1,5 @@
-@import "./color";
-@import "~@angular/material/theming";
+@import './color';
+@import '~@angular/material/theming';
 //foreground
 @function jurevida-foreground($color) {
   @return (text: $text-color);
@@ -9,7 +9,7 @@ $white-foreground: jurevida-foreground(white);
 
 //font
 $jurevida-typography: mat-typography-config(
-  $font-family: '"Montserrat", sans-serif;',
+  $font-family: '"Montserrat", sans-serif;'
 );
 
 @include mat-core($jurevida-typography);
@@ -18,16 +18,12 @@ $jurevida-primary: mat-palette($jurevida-psicologia, 800);
 $jurevida-accent: mat-palette($jurevida-medicina, 500);
 $jurevida-warn: mat-palette($jurevida-leyes, 500);
 
-$jurevida-theme: mat-light-theme(
-  $jurevida-primary,
-  $jurevida-accent,
-  $jurevida-warn
-);
+$jurevida-theme: mat-light-theme($jurevida-primary, $jurevida-accent, $jurevida-warn);
 
 $app-theme: map-merge(
   $jurevida-theme,
   (
-    foreground: $white-foreground,
+    foreground: $white-foreground
   )
 );
 @include angular-material-theme($app-theme);

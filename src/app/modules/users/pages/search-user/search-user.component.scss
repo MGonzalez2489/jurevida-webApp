@@ -10,9 +10,27 @@ mat-drawer-container {
   padding: 1rem;
   min-width: 16rem;
 }
-.mat-drawer-container {
-  background-color: transparent !important;
-}
 .list-option {
   height: 2.5rem !important;
+}
+.drawer-container {
+  width: 1440px;
+}
+mat-card {
+  margin: 1rem;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0;
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .left-side {
+    background-color: #fff;
+  }
+  .drawer-container {
+    width: 100%;
+  }
 }

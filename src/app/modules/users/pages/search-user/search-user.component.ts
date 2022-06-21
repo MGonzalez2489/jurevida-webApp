@@ -2,6 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDrawer } from '@angular/material/sidenav';
 import { Sort } from '@angular/material/sort';
 import { UserModel } from '@core/models/database';
 import { ResultListModel } from '@core/models/responses';
@@ -12,7 +13,7 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-search-user',
   templateUrl: './search-user.component.html',
-  styleUrls: ['./search-user.component.scss'],
+  styleUrls: ['./search-user.component.scss']
 })
 export class SearchUserComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['fullName', 'email', 'phone', 'options'];
@@ -23,11 +24,7 @@ export class SearchUserComponent implements OnInit, OnDestroy {
 
   showFiller = true;
   private _mobileQueryListener: () => void;
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher,
-    private userService: UserService
-  ) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private userService: UserService) {
     this.mobileQuery = media.matchMedia('(max-width:600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -61,8 +58,11 @@ export class SearchUserComponent implements OnInit, OnDestroy {
     this.search.perPage = event.pageSize;
     this.loadUsers();
   }
-  filterType(event: MatSelectionListChange) {
+  filterType(event: MatSelectionListChange, sideBar: MatDrawer) {
     this.search.profile = event.options[0].value;
     this.loadUsers();
+    if (this.mobileQuery.matches) {
+      sideBar.toggle();
+    }
   }
 }
