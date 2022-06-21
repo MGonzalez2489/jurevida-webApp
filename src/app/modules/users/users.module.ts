@@ -20,7 +20,7 @@ import { CreateCouncilComponent } from './pages/create-council/create-council.co
 import { CreateSponsorComponent } from './pages/create-sponsor/create-sponsor.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
   declarations: [SearchUserComponent, CreateCouncilComponent, CreateSponsorComponent],
   imports: [
@@ -41,7 +41,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class UsersModule {}

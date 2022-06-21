@@ -36,7 +36,7 @@
             <div class="d-flex flex-row m-flex-column gap-d-3">
               <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Telefono</mat-label>
-                <input matInput placeholder="Telefono" formControlName="phone" />
+                <input matInput [mask]="'(000) 000-0000'" placeholder="Telefono" formControlName="phone" />
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="w-full">
