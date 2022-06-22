@@ -51,9 +51,15 @@
       </mat-drawer>
       <div class="drawer-content">
         <div class="m-3">
-          <mat-form-field class="bg-card w-full" appearance="outline" style="margin-bottom: -1.25em">
+          <mat-form-field class="w-full" appearance="outline" style="margin-bottom: -1.25em">
             <mat-label>Buscar</mat-label>
-            <input matInput type="text" [(ngModel)]="search.keyword" placeholder="Buscar por nombre, email o telefono..." (keyup)="loadUsers()" />
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="searchKeyword"
+              placeholder="Buscar por nombre, email o telefono..."
+              (keyup)="searchByKeyword()"
+            />
             <button *ngIf="search.keyword" matSuffix mat-icon-button aria-label="Clear" (click)="search.keyword = ''">
               <mat-icon>close</mat-icon>
             </button>

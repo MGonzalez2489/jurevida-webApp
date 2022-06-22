@@ -49,3 +49,8 @@ $app-theme: map-merge(
     width: 133.33333%;
   }
 }
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}

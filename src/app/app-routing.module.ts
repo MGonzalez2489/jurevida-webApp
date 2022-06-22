@@ -6,8 +6,7 @@ import { PageComponent } from '@shared/components/layout/page/page.component';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: '',
@@ -16,16 +15,19 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
-        loadChildren: () =>
-          import('./modules/users/users.module').then((m) => m.UsersModule),
+        loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule)
       },
-      { path: '', redirectTo: 'users', pathMatch: 'full' },
-    ],
-  },
+      {
+        path: 'society',
+        loadChildren: () => import('./modules/society/society.module').then((m) => m.SocietyModule)
+      },
+      { path: '', redirectTo: 'users', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

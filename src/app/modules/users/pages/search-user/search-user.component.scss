@@ -1,36 +1,36 @@
-mat-drawer-container {
-  background-color: transparent;
-}
-.left-side {
-  background-color: transparent;
-  border: none;
-  margin-right: 1.5rem;
-}
-.list-options {
-  padding: 1rem;
-  min-width: 16rem;
-}
-.list-option {
-  height: 2.5rem !important;
-}
-.drawer-container {
-  width: 1440px;
-}
-mat-card {
-  margin: 1rem;
-}
+//mat-drawer-container {
+  //background-color: transparent;
+//}
+//.left-side {
+  //background-color: transparent;
+  //border: none;
+  //margin-right: 1.5rem;
+//}
+//.list-options {
+  //padding: 1rem;
+  //min-width: 16rem;
+//}
+//.list-option {
+  //height: 2.5rem !important;
+//}
+//.drawer-container {
+  //width: 1440px;
+//}
+//mat-card {
+  //margin: 1rem;
+//}
 
-:host ::ng-deep .mat-form-field-wrapper {
-  margin: 0 !important;
-  padding: 0;
-}
+//:host ::ng-deep .mat-form-field-wrapper {
+  //margin: 0 !important;
+  //padding: 0;
+//}
 
-/* For Mobile Phones Portrait or Landscape View */
-@media screen and (max-device-width: 640px) {
-  .left-side {
-    background-color: #fff;
-  }
-  .drawer-container {
-    width: 100%;
-  }
-}
+//[> For Mobile Phones Portrait or Landscape View <]
+//@media screen and (max-device-width: 640px) {
+  //.left-side {
+    //background-color: #fff;
+  //}
+  //.drawer-container {
+    //width: 100%;
+  //}
+//}

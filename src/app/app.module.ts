@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { SharedModule } from '@shared/_shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '@core/interceptors';
+import { FormatRequestInterceptor } from '@core/interceptors/format-request.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,10 @@ import { JwtInterceptor } from '@core/interceptors';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: FormatRequestInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

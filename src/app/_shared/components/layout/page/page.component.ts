@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { environment } from '@environment/environment';
 import { MenuItems } from './MenuItems';
 import { iSideMenuItem } from '@shared/interfaces/layout';
+import {MatDrawer} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-page',
@@ -26,5 +27,10 @@ export class PageComponent implements OnDestroy {
   }
   trackByMenuItems(index: number): number {
     return index;
+  }
+  selectMenu(sideNav: MatDrawer){
+    if(this.mobileQuery.matches){
+      sideNav.toggle();
+    }
   }
 }
