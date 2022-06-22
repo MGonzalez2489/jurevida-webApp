@@ -3,7 +3,7 @@
   <div class="bg-card">
     <div class="w-desktop maw-desktop page-title-wrapper d-flex justify-content-between">
       <div class="page-title-content">
-        <div class="page-title d-flex align-items-center ">
+        <div class="page-title d-flex align-items-center">
           <div class="d-hidden m-visible ps-3">
             <button mat-icon-button (click)="drawer.toggle()">
               <mat-icon>menu</mat-icon>
@@ -53,14 +53,14 @@
         <div class="m-3">
           <mat-form-field class="bg-card w-full" appearance="outline" style="margin-bottom: -1.25em">
             <mat-label>Buscar</mat-label>
-            <input matInput type="text" [(ngModel)]="search.keyword" placeholder="Buscar por nombre, email o telefono..." />
+            <input matInput type="text" [(ngModel)]="search.keyword" placeholder="Buscar por nombre, email o telefono..." (keyup)="loadUsers()" />
             <button *ngIf="search.keyword" matSuffix mat-icon-button aria-label="Clear" (click)="search.keyword = ''">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
         </div>
 
-        <mat-card class="br-3 scroll-x">
+        <mat-card class="scroll-x">
           <table mat-table [dataSource]="users.model" class="flex-auto table w-full" matSort (matSortChange)="sort($event)">
             <ng-container matColumnDef="fullName">
               <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'fullName'">Nombre</th>
