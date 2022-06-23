@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [SocietyComponent, CouncilComponent, SponsorComponent, AssociatedComponent],
   imports: [
@@ -27,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatListModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ]
 })
 export class SocietyModule {}

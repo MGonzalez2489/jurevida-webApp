@@ -6,28 +6,28 @@ export const MenuItems: iSideMenuItem[] = [
     text: 'Opciones',
     icon: '',
     routerLink: '',
-    disabled: false,
+    disabled: false
   },
   {
     isTitle: false,
     text: 'Sociedad',
     icon: 'group_work',
     routerLink: '/society',
-    disabled: false,
+    disabled: false
   },
   {
     isTitle: false,
     text: 'Finanzas',
     icon: 'show_chart',
     routerLink: '/finance',
-    disabled: true,
+    disabled: true
   },
   {
     isTitle: false,
     text: 'Documentos',
     icon: 'file_copy',
     routerLink: '/documents',
-    disabled: true,
+    disabled: true
   },
   { isTitle: true, text: 'Oficina', icon: '', routerLink: '', disabled: false },
   {
@@ -35,6 +35,21 @@ export const MenuItems: iSideMenuItem[] = [
     text: 'Usuarios',
     icon: 'supervisor_account',
     routerLink: '/users',
-    disabled: false,
+    disabled: false
   },
+  //{
+    //isTitle: false,
+    //text: 'Aux Bancario',
+    //icon: 'supervisor_account',
+    //routerLink: '/users',
+    //disabled: false
+  //},
+
+  //{
+    //isTitle: false,
+    //text: 'Aux Caja',
+    //icon: 'supervisor_account',
+    //routerLink: '/users',
+    //disabled: false
+  //}
 ];

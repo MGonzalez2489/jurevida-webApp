@@ -8,10 +8,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class SocietyService {
   constructor(private requestService: RequestService) {}
 
-  getAll(search: BaseSearchCriteria): Observable<ResultListModel<UserModel>> {
-    return this.requestService.getList<UserModel>('users', search);
+  getCouncilMembers(search: BaseSearchCriteria): Observable<ResultListModel<UserModel>> {
+    return this.requestService.getList<UserModel>('users/council', search);
+  }
+
+  getAssociatedMembers(search: BaseSearchCriteria): Observable<ResultListModel<UserModel>> {
+    return this.requestService.getList<UserModel>('users/associates', search);
   }
 }

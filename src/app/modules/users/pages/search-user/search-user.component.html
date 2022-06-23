@@ -19,7 +19,7 @@
         </button>
         <mat-menu #createUserMenu="matMenu">
           <button mat-menu-item routerLink="create-council">Miembro del Consejo</button>
-          <button mat-menu-item>Patrocinador</button>
+          <button mat-menu-item routerLink="create-sponsor">Patrocinador</button>
         </mat-menu>
       </div>
     </div>
@@ -30,20 +30,20 @@
     <mat-drawer-container class="h-full drawer-container" autosize>
       <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" class="left-side">
         <mat-selection-list class="list-options" multiple="false" (selectionChange)="filterType($event, drawer)">
-          <mat-list-option value="todos" selected="true" class="list-option br-3">
+          <mat-list-option value="" selected="true" class="list-option br-3">
             <mat-icon class="text-primary" mat-list-icon>local_offer</mat-icon>
             <div mat-line class="text-primary">Todos</div>
           </mat-list-option>
-          <mat-list-option value="consejo" class="list-option br-3">
+          <mat-list-option value="council" class="list-option br-3">
             <mat-icon class="text-secondary" mat-list-icon>local_offer</mat-icon>
             <div mat-line class="text-secondary">Consejo</div>
           </mat-list-option>
-          <mat-list-option value="asociado" class="list-option br-3">
+          <mat-list-option value="associated" class="list-option br-3">
             <mat-icon class="text-warning" mat-list-icon>local_offer</mat-icon>
 
             <div mat-line class="text-warning">Asociados</div>
           </mat-list-option>
-          <mat-list-option value="patrocinadores" class="list-option br-3">
+          <mat-list-option value="sponsor" class="list-option br-3">
             <mat-icon class="text-danger" mat-list-icon>local_offer</mat-icon>
             <div mat-line class="text-danger">Patrocinadores</div>
           </mat-list-option>

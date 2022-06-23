@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContributionModel, CouncilProfileModel, UserModel } from '@core/models/database';
+import { CouncilService } from '../../services/council.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateCouncilComponent implements OnInit {
     address: new FormControl(null),
     contribution: new FormControl(null, [Validators.required])
   });
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private councilService: CouncilService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -28,9 +29,8 @@ export class CreateCouncilComponent implements OnInit {
       return;
     }
 
-    let newCouncil = new UserModel();
+    const newCouncil = new UserModel();
     newCouncil.firstName = this.councilForm.value.firstName;
-
     newCouncil.lastName = this.councilForm.value.lastName;
     newCouncil.email = this.councilForm.value.email;
     newCouncil.phone = this.councilForm.value.phone;
@@ -42,7 +42,7 @@ export class CreateCouncilComponent implements OnInit {
     newContribution.contribution = this.councilForm.value.contribution;
     newCouncil.council.contributions.push(newContribution);
 
-    this.userService.post(newCouncil).subscribe(
+    this.councilService.post(newCouncil).subscribe(
       (data) => {
         this.router.navigate(['/users']);
       },

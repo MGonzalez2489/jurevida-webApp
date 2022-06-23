@@ -1,24 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateCouncilComponent } from './pages/create-council/create-council.component';
+import { CreateSponsorComponent } from './pages/create-sponsor/create-sponsor.component';
 import { SearchUserComponent } from './pages/search-user/search-user.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchUserComponent,
-    data: { title: 'Buscar Usuario' }
+    component: SearchUserComponent
   },
   {
     path: 'create-council',
-    component: CreateCouncilComponent,
-    data: { title: 'Nuevo Usuario' }
-  }
-  //{
-  //path: ':id/edit',
-  //component: UpdateUserComponent,
-  //data: { title: 'Editar Usuario' },
-  //},
+    component: CreateCouncilComponent
+  },
+  { path: 'create-sponsor', component: CreateSponsorComponent }
 ];
 
 @NgModule({

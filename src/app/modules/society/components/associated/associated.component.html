@@ -1,1 +1,22 @@
-<p>associated works!</p>
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    class="associated-panel"
+    (closed)="panelOpenState = false"
+    *ngFor="let a of associatesMembers.model"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title class="panel-title">
+        <div class="d-flex">
+          <img [src]="a.avatar" />
+          <div class="d-flex flex-column justify-content-center">
+            <p class="m-0">{{ a.fullName }}</p>
+            <span class="text-muted">{{ a.associated!.profession }}</span>
+          </div>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description> Currently I am {{ panelOpenState ? 'open' : 'closed' }} </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+</mat-accordion>

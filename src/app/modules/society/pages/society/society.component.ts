@@ -11,7 +11,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class SocietyComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-  renderedComponent: string = 'consejo';
+  renderedComponent: string = 'asociado';
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

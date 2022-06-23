@@ -46,7 +46,6 @@ export class SearchUserComponent implements OnInit, OnDestroy {
         this.users = data;
         this.search.totalPages = data.totalPages;
         this.search.totalRecords = data.totalRecords;
-        console.log('users', this.users);
       },
       (error) => {}
     );
