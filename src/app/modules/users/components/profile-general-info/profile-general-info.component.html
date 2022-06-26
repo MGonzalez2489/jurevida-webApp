@@ -1,0 +1,48 @@
+<div class="d-flex flex-column flex-auto bg-card shadow br-4 p-4">
+  <div class="d-flex flex-auto justify-content-between align-items-center">
+    <div class="text-lg font-medium tracking-tight leading-6 truncate">Informacion General</div>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <div class="items-container">
+    <div class="item">
+      <div class="icon-container">
+        <mat-icon>perm_identity</mat-icon>
+      </div>
+      <div class="item-info">
+        <p>{{ user.fullName }}</p>
+        <span class="text-muted">Nombre y Apellido</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="icon-container">
+        <mat-icon>email</mat-icon>
+      </div>
+      <div class="item-info">
+        <p>{{ user.email }}</p>
+        <span class="text-muted">Email</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="icon-container">
+        <mat-icon>phone</mat-icon>
+      </div>
+      <div class="item-info">
+        <p>{{ user.phone | phone }}</p>
+        <span class="text-muted">Telefono</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="icon-container">
+        <mat-icon>home</mat-icon>
+      </div>
+      <div class="item-info">
+        <p>{{ user.address }}</p>
+        <span class="text-muted">Domicilio</span>
+      </div>
+    </div>
+  </div>
+</div>

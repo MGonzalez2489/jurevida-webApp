@@ -21,8 +21,27 @@ import { CreateSponsorComponent } from './pages/create-sponsor/create-sponsor.co
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaskModule } from 'ngx-mask';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ProfileGeneralInfoComponent } from './components/profile-general-info/profile-general-info.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProfileSponsorInfoComponent } from './components/profile-sponsor-info/profile-sponsor-info.component';
+import { ProfileCouncilInfoComponent } from './components/profile-council-info/profile-council-info.component';
+import { ProfileAssociatedInfoComponent } from './components/profile-associated-info/profile-associated-info.component';
+import { AddCouncilContributionComponent } from './components/add-council-contribution/add-council-contribution.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
-  declarations: [SearchUserComponent, CreateCouncilComponent, CreateSponsorComponent],
+  declarations: [
+    SearchUserComponent,
+    CreateCouncilComponent,
+    CreateSponsorComponent,
+    ProfileComponent,
+    ProfileGeneralInfoComponent,
+    ProfileSponsorInfoComponent,
+    ProfileCouncilInfoComponent,
+    ProfileAssociatedInfoComponent,
+    AddCouncilContributionComponent
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -42,6 +61,9 @@ import { NgxMaskModule } from 'ngx-mask';
     MatCheckboxModule,
     MatSelectModule,
     MatButtonToggleModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatDialogModule,
     NgxMaskModule.forRoot()
   ]
 })

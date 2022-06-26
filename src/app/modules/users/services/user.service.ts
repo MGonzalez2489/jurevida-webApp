@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from '@core/models/database';
-import { ResultListModel } from '@core/models/responses';
+import { ResultListModel, ResultModel } from '@core/models/responses';
 import { BaseSearchCriteria } from '@core/models/searchCriteria';
 import { RequestService } from '@core/services';
 import { Observable } from 'rxjs';
@@ -13,5 +13,8 @@ export class UserService {
 
   getAll(search: BaseSearchCriteria): Observable<ResultListModel<UserModel>> {
     return this.requestService.getList<UserModel>('users', search);
+  }
+  getUser(publicId: string): Observable<ResultModel<UserModel>> {
+    return this.requestService.get<UserModel>(`users/${publicId}`);
   }
 }

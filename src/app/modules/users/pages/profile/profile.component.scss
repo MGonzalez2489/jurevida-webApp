@@ -1,0 +1,14 @@
+.profile-container {
+  display: flex;
+  gap: 1.5rem;
+
+  .profile-general {
+    flex: 0 1 auto;
+  }
+
+  .profile-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -15,6 +15,7 @@ import { StopPropagationDirective } from './directives/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PhonePipe } from './pipes/phone.pipe';
 import {HttpClientModule} from '@angular/common/http';
+import { DatePipe } from './pipes/date.pipe';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
     PageComponent,
     StopPropagationDirective,
     PhonePipe,
+    DatePipe,
   ],
   imports: [
     CommonModule,
