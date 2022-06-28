@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserModel } from '@core/models/database';
+import { EditUserInfoModalComponent } from '../edit-user-info-modal/edit-user-info-modal.component';
 
 @Component({
   selector: 'app-profile-general-info',
@@ -9,7 +11,23 @@ import { UserModel } from '@core/models/database';
 export class ProfileGeneralInfoComponent implements OnInit {
   @Input()
   user: UserModel = new UserModel();
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
+
+  @Output()
+  update: EventEmitter<boolean> = new EventEmitter();
 
   ngOnInit(): void {}
+
+  edit(): void {
+    const dialog = this.dialog.open(EditUserInfoModalComponent, {
+      width: '450px',
+      data: { user: this.user }
+    });
+
+    dialog.afterClosed().subscribe((data) => {
+      if (data) {
+        this.update.emit(true);
+      }
+    });
+  }
 }

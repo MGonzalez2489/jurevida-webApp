@@ -15,8 +15,76 @@
           </div>
         </div>
       </mat-panel-title>
-      <mat-panel-description> Currently I am {{ panelOpenState ? 'open' : 'closed' }} </mat-panel-description>
+      <mat-panel-description> Socio desde {{ a.createdAt | date }} </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+
+    <div class="panel-container">
+      <div class="item desktop-hidden mobile-visible">
+        <div class="icon-container">
+          <mat-icon>work</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.associated?.profession }}</p>
+          <span class="text-muted">Profesion</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>place</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.associated?.placeOfBirth }}</p>
+          <span class="text-muted">Fecha y Lugar de Nacimiento</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>how_to_reg</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.associated?.rfc }}</p>
+          <span class="text-muted">RFC</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>assignment_ind</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.associated?.maritalStatus }}</p>
+          <span class="text-muted">Estado Civil</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>phone</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.phone }}</p>
+          <span class="text-muted">Telefono</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>email</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.email }}</p>
+          <span class="text-muted">Email</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>home</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ a.address }}</p>
+          <span class="text-muted">Domicilio</span>
+        </div>
+      </div>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

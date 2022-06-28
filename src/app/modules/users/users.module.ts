@@ -30,6 +30,8 @@ import { ProfileCouncilInfoComponent } from './components/profile-council-info/p
 import { ProfileAssociatedInfoComponent } from './components/profile-associated-info/profile-associated-info.component';
 import { AddCouncilContributionComponent } from './components/add-council-contribution/add-council-contribution.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditUserInfoModalComponent } from './components/edit-user-info-modal/edit-user-info-modal.component';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     SearchUserComponent,
@@ -40,7 +42,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ProfileSponsorInfoComponent,
     ProfileCouncilInfoComponent,
     ProfileAssociatedInfoComponent,
-    AddCouncilContributionComponent
+    AddCouncilContributionComponent,
+    EditUserInfoModalComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatDividerModule,
     MatDialogModule,
+    MatChipsModule,
     NgxMaskModule.forRoot()
   ]
 })

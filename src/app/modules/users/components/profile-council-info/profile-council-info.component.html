@@ -19,11 +19,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>edit</mat-icon>
-          <span>Editar</span>
-        </button>
-        <button mat-menu-item [disabled]="user.council!.contributions.length === 0" (click)="deleteContribution(c.publicId)">
+        <button mat-menu-item [disabled]="user.council!.contributions.length === 1" (click)="deleteContribution(c.publicId)">
           <mat-icon>delete</mat-icon>
           <span> Eliminar </span>
         </button>

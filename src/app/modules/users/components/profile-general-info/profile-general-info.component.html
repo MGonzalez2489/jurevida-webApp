@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-auto bg-card shadow br-4 p-4">
   <div class="d-flex flex-auto justify-content-between align-items-center">
     <div class="text-lg font-medium tracking-tight leading-6 truncate">Informacion General</div>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="edit()">
       <mat-icon>edit</mat-icon>
     </button>
   </div>
@@ -15,7 +15,6 @@
         <span class="text-muted">Nombre y Apellido</span>
       </div>
     </div>
-
     <div class="item">
       <div class="icon-container">
         <mat-icon>email</mat-icon>
@@ -42,6 +41,31 @@
       <div class="item-info">
         <p>{{ user.address }}</p>
         <span class="text-muted">Domicilio</span>
+      </div>
+    </div>
+    <!--associated-->
+    <div *ngIf="user.associated">
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>group</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ user.associated.maritalStatus }}</p>
+          <span class="text-muted">Estado Civil</span>
+        </div>
+      </div>
+    </div>
+
+    <!--sponsor-->
+    <div *ngIf="user.sponsor">
+      <div class="item">
+        <div class="icon-container">
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </div>
+        <div class="item-info">
+          <p>{{ user.sponsor.nickName }}</p>
+          <span class="text-muted">Nickname</span>
+        </div>
       </div>
     </div>
   </div>

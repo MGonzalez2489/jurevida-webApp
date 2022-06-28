@@ -5,8 +5,4 @@ export class AssociateProfileModel extends BaseModel {
   rfc: string = '';
   maritalStatus: string = '';
   profession: string = '';
-  //placeOfBirth: { type: 'string' },
-  //rfc: { type: 'string' },
-  //maritalStatus: { type: 'string' },
-  //profession: { type: 'string' },
 }

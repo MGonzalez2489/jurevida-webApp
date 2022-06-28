@@ -8,12 +8,18 @@ export class FormatRequestInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const newRequest = request.clone({
-      params: request.params ? this.removeNullValuesFromQueryParams(request.params) : request.params
+      params: request.params ? this.removeNullValuesFromQueryParams(request.params) : request.params,
+      body: request.body ? this.deleteEmptyPropsFromBody(request.body) : request.body
     });
-
     return next.handle(newRequest);
   }
-
+  deleteEmptyPropsFromBody(obj: any): any {
+    return Object.keys(obj).forEach((k) => {
+      if (!obj[k] || obj[k] === undefined || obj[k] === '' || (Array.isArray(obj[k]) && obj[k].length === 0)) {
+        delete obj[k];
+      }
+    });
+  }
   removeNullValuesFromQueryParams(params: HttpParams) {
     const paramsKeysAux = params.keys();
     paramsKeysAux.forEach((key) => {

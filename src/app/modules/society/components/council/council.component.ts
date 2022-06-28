@@ -11,8 +11,11 @@ import { SocietyService } from '../../services/society.service';
 })
 export class CouncilComponent implements OnInit {
   search: BaseSearchCriteria = new BaseSearchCriteria();
+  displayedColumns: string[] = ['contribution'];
+
   councilMembers: ResultListModel<UserModel> = new ResultListModel<UserModel>();
   constructor(private societyService: SocietyService) {}
+  panelOpenState: boolean = false;
 
   ngOnInit(): void {
     this.loadMembers();
@@ -22,7 +25,7 @@ export class CouncilComponent implements OnInit {
     this.societyService.getCouncilMembers(this.search).subscribe(
       (data) => {
         this.councilMembers = data;
-        console.log(data)
+        console.log(data);
       },
       (errpr) => {}
     );

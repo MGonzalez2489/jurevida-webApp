@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'society',
         loadChildren: () => import('./modules/society/society.module').then((m) => m.SocietyModule)
       },
+      {
+        path: 'documents',
+        loadChildren: () => import('./modules/documents/documents.module').then((m) => m.DocumentsModule)
+      },
       { path: '', redirectTo: 'users', pathMatch: 'full' }
     ]
   }
