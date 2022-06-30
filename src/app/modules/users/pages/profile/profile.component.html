@@ -27,7 +27,7 @@
         <div class="profile-general">
           <app-profile-general-info [user]="user" (update)="update()"></app-profile-general-info>
         </div>
-        <div class="profile-content" *ngIf="user.council || user.sponsor">
+        <div class="profile-content" *ngIf="user.council">
           <app-profile-council-info [user]="user" (update)="update()"></app-profile-council-info>
         </div>
       </div>
