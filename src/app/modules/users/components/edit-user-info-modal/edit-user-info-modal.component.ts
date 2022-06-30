@@ -60,6 +60,7 @@ export class EditUserInfoModalComponent implements OnInit {
     userUpdated.firstName = this.form.value.firstName;
     userUpdated.lastName = this.form.value.lastName;
     userUpdated.phone = this.form.value.phone;
+    userUpdated.address = this.form.value.address;
     if (this.user.sponsor) {
       const sponsorProfile = new SponsorProfileModel();
       sponsorProfile.publicId = this.user.sponsor.publicId;

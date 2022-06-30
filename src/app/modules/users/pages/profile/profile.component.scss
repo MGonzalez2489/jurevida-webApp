@@ -1,3 +1,12 @@
+.page-title {
+  img {
+    width: 8rem;
+    height: 8rem;
+    margin-right: 1rem;
+    border-radius: 9999px;
+  }
+}
+
 .profile-container {
   display: flex;
   gap: 1.5rem;
@@ -12,5 +21,15 @@
     display: flex;
     flex-direction: column;
     width: auto;
+  }
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .page-title {
+    img {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }

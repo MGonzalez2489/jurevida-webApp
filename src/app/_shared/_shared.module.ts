@@ -14,18 +14,12 @@ import { RouterModule } from '@angular/router';
 import { StopPropagationDirective } from './directives/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PhonePipe } from './pipes/phone.pipe';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from './pipes/date.pipe';
-
+import { ImgPlaceholderDirective } from './directives/img-placeholder.directive';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    PageComponent,
-    StopPropagationDirective,
-    PhonePipe,
-    DatePipe,
-  ],
+  declarations: [NavbarComponent, PageComponent, StopPropagationDirective, PhonePipe, DatePipe, ImgPlaceholderDirective],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -39,6 +33,6 @@ import { DatePipe } from './pipes/date.pipe';
     MatDialogModule,
     HttpClientModule
   ],
-  exports: [StopPropagationDirective, PhonePipe],
+  exports: [StopPropagationDirective, PhonePipe, ImgPlaceholderDirective]
 })
 export class SharedModule {}

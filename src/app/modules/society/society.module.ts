@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { SharedModule } from '@shared/_shared.module';
 @NgModule({
   declarations: [SocietyComponent, CouncilComponent, SponsorComponent, AssociatedComponent],
   imports: [
@@ -28,7 +29,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatListModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    SharedModule
   ]
 })
 export class SocietyModule {}
