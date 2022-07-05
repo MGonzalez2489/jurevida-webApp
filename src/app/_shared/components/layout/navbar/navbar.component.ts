@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { UserModel } from '@core/models/database';
 import { SessionService } from '@core/services';
+import { ResetPasswordModalComponent } from '@shared/components/reset-password-modal/reset-password-modal.component';
 import { iPage } from '@shared/interfaces/layout';
 
 @Component({
@@ -20,7 +21,7 @@ export class NavbarComponent implements OnInit {
   };
   user: UserModel = new UserModel();
 
-  constructor(private sessionService: SessionService, private router: Router, private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private sessionService: SessionService, private router: Router, private dialog: MatDialog) {
     this.loadSessionInfo();
     this.sessionService.getCurrentSession().subscribe((data) => {
       this.user = data.user;
@@ -42,6 +43,6 @@ export class NavbarComponent implements OnInit {
     }
   }
   openModal(): void {
-    //this.dialog.open(ResetPasswordModalComponent);
+    this.dialog.open(ResetPasswordModalComponent);
   }
 }
