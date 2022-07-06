@@ -9,8 +9,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SharedModule } from '@shared/_shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from '@core/interceptors';
+import { ErrorInterceptor, JwtInterceptor } from '@core/interceptors';
 import { FormatRequestInterceptor } from '@core/interceptors/format-request.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,11 +25,13 @@ import { FormatRequestInterceptor } from '@core/interceptors/format-request.inte
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: FormatRequestInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: FormatRequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

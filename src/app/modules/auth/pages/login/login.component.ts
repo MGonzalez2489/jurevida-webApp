@@ -7,23 +7,19 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
-    rememberMe: new FormControl(false),
+    rememberMe: new FormControl(false)
   });
   inpPasswordType: string = 'password';
   get form() {
     return this.loginForm.controls;
   }
-  constructor(
-    private service: AuthService,
-    private route: Router,
-    private sessionService: SessionService
-  ) {}
+  constructor(private service: AuthService, private route: Router, private sessionService: SessionService) {}
 
   ngOnInit(): void {}
 
@@ -33,17 +29,15 @@ export class LoginComponent implements OnInit {
     }
     this.service.postLogin(this.loginForm.value).subscribe(
       (data) => {
-        this.sessionService.initializeSession(
-          data.model,
-          this.loginForm.value.rememberMe
-        );
+        this.sessionService.initializeSession(data.model, this.loginForm.value.rememberMe);
         this.route.navigate(['/']);
       },
-      (error) => {}
+      (error) => {
+        console.log('error', error);
+      }
     );
   }
   changePasswordInputType(): void {
-    this.inpPasswordType =
-      this.inpPasswordType == 'password' ? 'text' : 'password';
+    this.inpPasswordType = this.inpPasswordType == 'password' ? 'text' : 'password';
   }
 }
