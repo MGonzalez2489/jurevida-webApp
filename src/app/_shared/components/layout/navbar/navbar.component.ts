@@ -43,6 +43,6 @@ export class NavbarComponent implements OnInit {
     }
   }
   openModal(): void {
-    this.dialog.open(ResetPasswordModalComponent);
+    this.dialog.open(ResetPasswordModalComponent, { disableClose: true });
   }
 }

@@ -12,6 +12,7 @@ import Validation from '@shared/validators/MustMatch';
 export class ResetPasswordModalComponent implements OnInit {
   passwordForm: FormGroup = new FormGroup(
     {
+      currentPassword: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(16)]),
       confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)])
     },
@@ -32,7 +33,7 @@ export class ResetPasswordModalComponent implements OnInit {
   submit(): void {
     if (this.passwordForm.valid) {
       const publicId = this.sessionService.getSessionUser()!.publicId;
-      this.passwordService.resetPassword(this.passwordForm.value.password, publicId).subscribe(
+      this.passwordService.resetPassword(this.passwordForm.value.currentPassword, this.passwordForm.value.password, publicId).subscribe(
         (data: any) => {
           this.dialogRef.close();
         },

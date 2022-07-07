@@ -77,7 +77,6 @@ export class EditUserInfoModalComponent implements OnInit {
 
     this.userService.putUser(this.user.publicId, userUpdated).subscribe(
       (data) => {
-        console.log('data,', data);
         this.dialogRef.close(true);
       },
       (error) => {

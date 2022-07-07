@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PageComponent } from './components/layout/page/page.component';
-import { RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { StopPropagationDirective } from './directives/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PhonePipe } from './pipes/phone.pipe';
@@ -20,6 +20,7 @@ import { ImgPlaceholderDirective } from './directives/img-placeholder.directive'
 import { ResetPasswordModalComponent } from './components/reset-password-modal/reset-password-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [NavbarComponent, PageComponent, StopPropagationDirective, PhonePipe, DatePipe, ImgPlaceholderDirective, ResetPasswordModalComponent],
@@ -36,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [StopPropagationDirective, PhonePipe, ImgPlaceholderDirective]
 })

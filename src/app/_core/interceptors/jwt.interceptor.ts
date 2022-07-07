@@ -21,10 +21,10 @@ export class JwtInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError((x) => this.handleAuthError(x)));
   }
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
+    console.log('error authorization', err);
     if (err.status === 401 || err.status === 403) {
       alert('La session finalizo, por favor inicia sesion de nuevo para continuar');
       this.sessionService.deleteSession();
-
       this.router.navigateByUrl(`/auth`);
       return of(err.message);
     }

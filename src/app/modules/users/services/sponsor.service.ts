@@ -11,6 +11,6 @@ export class SponsorService {
   constructor(private requestService: RequestService) {}
 
   post(user: UserModel): Observable<ResultModel<UserModel>> {
-    return this.requestService.post('users/sponsor', user);
+    return this.requestService.post('users/sponsor', { user });
   }
 }

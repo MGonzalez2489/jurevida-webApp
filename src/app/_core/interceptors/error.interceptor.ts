@@ -28,8 +28,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           jurevidaError.status = error.status;
           jurevidaError.message = error.message;
         }
-
-        this.notificationService.openMessage(jurevidaError.error);
+        if (jurevidaError.status !== 401) {
+          this.notificationService.openMessage(jurevidaError.error);
+        }
 
         if (!environment.production) {
           console.log('Request Error', jurevidaError);

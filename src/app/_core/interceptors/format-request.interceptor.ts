@@ -15,7 +15,9 @@ export class FormatRequestInterceptor implements HttpInterceptor {
   }
   deleteEmptyPropsFromBody(obj: any): any {
     return Object.keys(obj).forEach((k) => {
-      if (!obj[k] || obj[k] === undefined || obj[k] === '' || (Array.isArray(obj[k]) && obj[k].length === 0)) {
+      if (obj[k] instanceof Object) {
+        k = this.deleteEmptyPropsFromBody(obj[k]);
+      } else if (!obj[k] || obj[k] === '' || (Array.isArray(obj[k]) && obj[k].length === 0)) {
         delete obj[k];
       }
     });

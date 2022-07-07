@@ -47,7 +47,6 @@ export class CreateCouncilComponent implements OnInit {
         this.router.navigate(['/users']);
       },
       (error) => {
-        console.log('error', error);
       }
     );
   }

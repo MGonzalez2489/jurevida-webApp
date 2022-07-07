@@ -35,7 +35,6 @@ export class AddCouncilContributionComponent implements OnInit {
 
     this.councilService.postContribution(this.user.publicId, this.form.value.contribution).subscribe(
       (data) => {
-        console.log('data', data);
         this.dialogRef.close(true);
       },
       (error) => {}

@@ -19,6 +19,6 @@ export class UserService {
   }
 
   putUser(publicId: string, user: UserModel): Observable<ResultModel<UserModel>> {
-    return this.requestService.put(`users/${publicId}`, user);
+    return this.requestService.put(`users/${publicId}`, { user });
   }
 }
