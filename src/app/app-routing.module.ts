@@ -25,7 +25,11 @@ const routes: Routes = [
         path: 'documents',
         loadChildren: () => import('./modules/documents/documents.module').then((m) => m.DocumentsModule)
       },
-      { path: '', redirectTo: 'users', pathMatch: 'full' }
+      {
+        path: 'assistant',
+        loadChildren: () => import('./modules/bank-assistant/bank-assistant.module').then((m) => m.BankAssistantModule)
+      },
+      { path: '', redirectTo: 'assistant', pathMatch: 'full' }
     ]
   }
 ];

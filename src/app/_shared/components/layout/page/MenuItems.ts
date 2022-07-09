@@ -15,13 +15,13 @@ export const MenuItems: iSideMenuItem[] = [
     routerLink: '/society',
     disabled: false
   },
-  {
-    isTitle: false,
-    text: 'Finanzas',
-    icon: 'show_chart',
-    routerLink: '/finance',
-    disabled: true
-  },
+  //{
+  //isTitle: false,
+  //text: 'Finanzas',
+  //icon: 'show_chart',
+  //routerLink: '/finance',
+  //disabled: true
+  //},
   {
     isTitle: false,
     text: 'Documentos',
@@ -37,19 +37,19 @@ export const MenuItems: iSideMenuItem[] = [
     routerLink: '/users',
     disabled: false
   },
-  //{
-    //isTitle: false,
-    //text: 'Aux Bancario',
-    //icon: 'supervisor_account',
-    //routerLink: '/users',
-    //disabled: false
-  //},
+  {
+    isTitle: false,
+    text: 'Aux Bancario',
+    icon: 'supervisor_account',
+    routerLink: '/assistant',
+    disabled: false
+  }
 
   //{
-    //isTitle: false,
-    //text: 'Aux Caja',
-    //icon: 'supervisor_account',
-    //routerLink: '/users',
-    //disabled: false
+  //isTitle: false,
+  //text: 'Aux Caja',
+  //icon: 'supervisor_account',
+  //routerLink: '/users',
+  //disabled: false
   //}
 ];

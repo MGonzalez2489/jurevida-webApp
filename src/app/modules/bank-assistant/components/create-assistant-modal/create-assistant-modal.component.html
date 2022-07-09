@@ -1,0 +1,26 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <h1>Nuevo Auxiliar</h1>
+  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
+
+  <form (submit)="submit()" [formGroup]="form">
+    <mat-checkbox (change)="setPettyCash($event)" class="mb-3" formControlName="isPrettyCash">Auxiliar de Caja?</mat-checkbox>
+    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPrettyCash">
+      <mat-label>Nombre del Banco</mat-label>
+      <input matInput placeholder="Nombre del banco" formControlName="bank" autofocus />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPrettyCash">
+      <mat-label>Numero de Cuenta</mat-label>
+      <input matInput placeholder="Numero de la cuenta bancaria" formControlName="accountNumber" autofocus />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Monto Inicial</mat-label>
+      <input matInput type="number" formControlName="amount" autofocus />
+    </mat-form-field>
+
+    <div class="d-flex justify-content-center align-items-center w-full mt-5" mat-dialog-actions>
+      <button mat-button color="primary" type="button" class="me-4" (click)="cancel()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary">Crear</button>
+    </div>
+  </form>
+</div>
