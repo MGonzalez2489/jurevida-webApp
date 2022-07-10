@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FinancialAssistantModel } from '@core/models/database';
+import { distinctUntilChanged } from 'rxjs';
 import { MovementsService } from '../../services/movements.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { MovementsService } from '../../services/movements.service';
   styleUrls: ['./create-income.component.scss']
 })
 export class CreateIncomeComponent implements OnInit {
-  assistant: string = '';
+  assistant: FinancialAssistantModel = new FinancialAssistantModel();
   form: FormGroup = new FormGroup({
     amount: new FormControl(0, [Validators.required]),
     concept: new FormControl(null, [Validators.required])
@@ -21,17 +23,15 @@ export class CreateIncomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.assistant = this.data['assistant'];
+    this.assistant = this.data;
   }
   submit(): void {
-    this.movementService.createIncome(this.assistant, this.form.value).subscribe(
-      (data) => {
-        console.log('data', data);
-      },
-      (error) => {
-        console.log('error', error);
-      }
-    );
+    if (this.form.invalid) {
+      return;
+    }
+    this.movementService.createIncome(this.assistant.publicId, this.form.value).subscribe((data) => {
+      this.dialogRef.close();
+    });
   }
   cancel(): void {
     this.dialogRef.close();

@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import { FinancialAssistantModel } from '@core/models/database';
-import { ResultModel } from '@core/models/responses';
 import { RequestService } from '@core/services';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { PeriodService } from './period.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssistantService {
-  constructor(private requestService: RequestService) {}
+  private bankSub$ = new BehaviorSubject<FinancialAssistantModel>(new FinancialAssistantModel());
 
-  getAssistantBank(): Observable<ResultModel<FinancialAssistantModel>> {
-    return this.requestService.get('financial/assistant/bank');
+  constructor(private requestService: RequestService, private periodService: PeriodService) {}
+
+  initialize(): void {
+    this.loadBank();
   }
 
-  postCreate(newAssistant: {
-    bank: string;
-    accountNumber: string;
-    isPrettyCash: boolean;
-    amount: number;
-  }): Observable<ResultModel<FinancialAssistantModel>> {
-    return this.requestService.post('financial/assistant', newAssistant);
+  private loadBank(): void {
+    this.requestService.get<FinancialAssistantModel>('financial/assistant/bank').subscribe((data) => {
+      this.bankSub$.next(data.model);
+    });
+  }
+  bankAssistant$(): Observable<FinancialAssistantModel> {
+    return this.bankSub$.asObservable();
+  }
+
+  postCreate(newAssistant: { bank: string; accountNumber: string; isPrettyCash: boolean; amount: number }): void {
+    this.requestService.post('financial/assistant', newAssistant).subscribe((data) => {
+      this.periodService.initialize();
+      this.loadBank();
+    });
   }
 }

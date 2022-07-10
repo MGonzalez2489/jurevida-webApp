@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FinancialAssistantModel } from '@core/models/database';
+import { distinctUntilChanged, Observable, Subscriber } from 'rxjs';
 import { MovementsService } from '../../services/movements.service';
 
 @Component({
@@ -9,9 +10,10 @@ import { MovementsService } from '../../services/movements.service';
   templateUrl: './create-expense.component.html',
   styleUrls: ['./create-expense.component.scss']
 })
-export class CreateExpenseComponent implements OnInit {
-  assistant: string = '';
+export class CreateExpenseComponent implements OnInit, OnDestroy {
+  assistant: FinancialAssistantModel = new FinancialAssistantModel();
   form: FormGroup = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
     amount: new FormControl(0, [Validators.required]),
     concept: new FormControl(null, [Validators.required])
   });
@@ -22,17 +24,16 @@ export class CreateExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.data', this.data);
+    this.assistant = this.data;
   }
+  ngOnDestroy(): void {}
   submit(): void {
-    this.movementService.createExpense(this.assistant, this.form.value).subscribe(
-      (data) => {
-        console.log('data', data);
-      },
-      (error) => {
-        console.log('error', error);
-      }
-    );
+    if (this.form.invalid) {
+      return;
+    }
+    this.movementService.createExpense(this.assistant.publicId, this.form.value).subscribe((data) => {
+      this.dialogRef.close();
+    });
   }
   cancel(): void {
     this.dialogRef.close();

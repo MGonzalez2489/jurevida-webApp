@@ -10,43 +10,83 @@
         <button mat-raised-button color="warn" (click)="createExpense()">Salida</button>
       </div>
     </div>
+    <div class="d-flex justify-content-center" *ngIf="assistant && period">
+      <div class="d-flex justify-content-around w-desktop">
+        <div class="d-flex">
+          <p class="me-1 text-muted">Banco</p>
+          <p>{{ assistant.bank }}</p>
+        </div>
+        <div class="d-flex">
+          <p class="me-1 text-muted">Cuenta</p>
+          <p>{{ assistant.accountNumber }}</p>
+        </div>
+        <div class="d-flex">
+          <p class="me-1 text-muted">Periodo</p>
+          <p>{{ period.startDate | date }}/{{ period.endDate | date }}</p>
+        </div>
+        <div class="d-flex">
+          <p class="me-1 text-muted">Monto Inicial</p>
+          <p>{{ period.startAmount | currency }}</p>
+        </div>
+        <div class="d-flex">
+          <p class="me-1 text-muted">Monto Actual</p>
+          <p>{{ period.currentAmount | currency }}</p>
+        </div>
+      </div>
+    </div>
   </div>
   <!--body-->
 
   <div class="page-body h-full d-flex justify-content-center">
-    <div *ngIf="!assistant.publicId" class="d-flex flex-column justify-content-center align-items-center">
+    <div *ngIf="!assistant" class="d-flex flex-column justify-content-center align-items-center">
       <h2 class="text-muted">Parece que aun no cuentas con un auxiliar bancario</h2>
       <p class="text-muted mb-4">Si quieres comenzar a registrar entradas y salidas de tu cuenta selecciona "crear".</p>
       <button id="btnCreate" mat-raised-button color="primary" (click)="createAssistant()">Crear</button>
     </div>
-    <mat-card *ngIf="assistant.publicId" class="scroll-x w-desktop">
-      <table mat-table [dataSource]="assistant.periods[0].movements" class="flex-auto table w-full">
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Fecha</th>
-          <td mat-cell *matCellDef="let element">{{ element.createdAt | date }}</td>
-        </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let element">Aqui va el nombre</td>
-        </ng-container>
-        <ng-container matColumnDef="concept">
-          <th mat-header-cell *matHeaderCellDef>Concepto</th>
-          <td mat-cell *matCellDef="let element">{{ element.concept }}</td>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef>Tipo</th>
-          <td mat-cell *matCellDef="let element">{{ element.type == 'expense' ? 'Gasto' : 'Ingreso' }}</td>
-        </ng-container>
+    <div *ngIf="assistant">
+      <div class="d-flex justify-content-center align-items-center" *ngIf="movements.model.length == 0">No hay Movimientos Registrados</div>
 
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef>Monto</th>
-          <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
-        </ng-container>
+      <mat-card *ngIf="assistant && movements.model.length > 0" class="scroll-x w-desktop">
+        <table mat-table [dataSource]="movements.model" matSort class="flex-auto table w-full" (matSortChange)="sort($event)">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'createdAt'">Fecha</th>
+            <td mat-cell *matCellDef="let element">{{ element.createdAt | date }}</td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </mat-card>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'name'">Nombre</th>
+            <td mat-cell *matCellDef="let element">Aqui va el nombre</td>
+          </ng-container>
+          <ng-container matColumnDef="concept">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'concept'">Concepto</th>
+            <td mat-cell *matCellDef="let element">{{ element.concept }}</td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'type'">Tipo</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{ income: element.type == 'income', expense: element.type == 'expense' }">
+              {{ element.type == 'expense' ? global.EXPENSE : global.INCOME }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'amount'">Monto</th>
+            <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <div class="d-flex justify-content-between align-items-center" *ngIf="movements.model.length > 0">
+          <span></span>
+          <mat-paginator
+            [length]="search.totalRecords"
+            [pageSize]="search.perPage"
+            (page)="changePage($event)"
+            [pageSizeOptions]="global.PAGINATION_SIZE"
+          ></mat-paginator>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>

@@ -23,15 +23,10 @@ export class CreateAssistantModalComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.assistantService.postCreate(this.form.value).subscribe(
-      (data) => {
-        console.log('nuevo asistonto', data);
-        this.dialogRef.close(data);
-      },
-      (error) => {
-        console.log('error nuevo asistonto', error);
-      }
-    );
+    this.assistantService.postCreate(this.form.value);
+    this.assistantService.bankAssistant$().subscribe((data) => {
+      this.dialogRef.close();
+    });
   }
   cancel(): void {
     this.dialogRef.close();

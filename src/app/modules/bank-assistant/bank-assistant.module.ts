@@ -16,6 +16,7 @@ import { CreateExpenseComponent } from './components/create-expense/create-expen
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from '@shared/_shared.module';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [AssistantSearchComponent, CreateAssistantModalComponent, CreateIncomeComponent, CreateExpenseComponent],
@@ -31,7 +32,8 @@ import { SharedModule } from '@shared/_shared.module';
     MatCheckboxModule,
     MatSelectModule,
     MatCardModule,
-    SharedModule
+    SharedModule,
+    MatSortModule
   ]
 })
 export class BankAssistantModule {}
