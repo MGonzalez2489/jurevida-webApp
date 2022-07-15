@@ -1,9 +1,8 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
-  <h1>Nuevo Auxiliar</h1>
+  <h1>{{ title }}</h1>
   <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
 
-  <form (submit)="submit()" [formGroup]="form">
-    <mat-checkbox (change)="setPettyCash($event)" class="mb-3" formControlName="isPrettyCash">Auxiliar de Caja?</mat-checkbox>
+  <form (submit)="submit()" [formGroup]="form" class="w-full mt-4">
     <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPrettyCash">
       <mat-label>Nombre del Banco</mat-label>
       <input matInput placeholder="Nombre del banco" formControlName="bank" autofocus />

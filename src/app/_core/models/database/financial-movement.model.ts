@@ -6,4 +6,7 @@ export class FinancialMovementModel extends BaseModel {
   amount: number = 0;
   concept: string = '';
   period: FinancialPeriodModel = new FinancialPeriodModel();
+
+  //internal
+  name: string = '';
 }

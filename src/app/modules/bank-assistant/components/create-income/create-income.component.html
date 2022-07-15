@@ -1,25 +1,22 @@
 <div class="d-flex flex-column">
-  <h1>Nuevo Ingreso</h1>
+  <h1>Nuevo {{ global.INCOME }}</h1>
   <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
   <form class="d-flex flex-column" [formGroup]="form" (submit)="submit()">
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo de Contribuyente</mat-label>
-      <select matNativeControl required>
-        <option value="patrocinador">Patrocinador</option>
-        <option value="unico">Unica Ocacion</option>
-      </select>
-    </mat-form-field>
+    <mat-checkbox class="mt-2 mb-4" (change)="changeSponsorType()" formControlName="existingSponsor">Patrocinador Registrado</mat-checkbox>
     <div>
-      <!--<mat-form-field appearance="outline">-->
-        <!--<mat-label>Nombre</mat-label>-->
-        <!--<input formControlName="name" matInput placeholder="Nombre del Contribuyente" />-->
-      <!--</mat-form-field>-->
-      <mat-form-field appearance="outline">
+      <mat-form-field class="w-full" appearance="outline" *ngIf="form.value.existingSponsor">
         <mat-label>Patrocinador</mat-label>
-        <select matNativeControl required>
-          <option value="patrocinador">Patrocinador A</option>
-          <option value="unico">Patrocinador B</option>
-        </select>
+        <input type="text" (keyup)="search()" placeholder="Busca al patrocinador" matInput formControlName="sponsor" [matAutocomplete]="auto" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of sponsors" [value]="option">
+            {{ option.fullName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="!form.value.existingSponsor" class="w-full">
+        <mat-label>Patrocinador Unico</mat-label>
+        <input matInput placeholder="Nombre del patrocinador" type="text" formControlName="sponsor" />
       </mat-form-field>
     </div>
     <mat-form-field appearance="outline">

@@ -21,9 +21,19 @@ import { ResetPasswordModalComponent } from './components/reset-password-modal/r
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
-  declarations: [NavbarComponent, PageComponent, StopPropagationDirective, PhonePipe, DatePipe, ImgPlaceholderDirective, ResetPasswordModalComponent],
+  declarations: [
+    NavbarComponent,
+    PageComponent,
+    StopPropagationDirective,
+    PhonePipe,
+    DatePipe,
+    ImgPlaceholderDirective,
+    ResetPasswordModalComponent,
+    ConfirmationModalComponent
+  ],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -40,6 +50,6 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule
   ],
-  exports: [StopPropagationDirective, PhonePipe, ImgPlaceholderDirective]
+  exports: [StopPropagationDirective, PhonePipe, ImgPlaceholderDirective, ConfirmationModalComponent]
 })
 export class SharedModule {}

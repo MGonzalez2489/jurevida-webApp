@@ -5,9 +5,9 @@
       <div class="page-title-content">
         <div class="page-title d-flex align-items-center">Auxiliar Bancario</div>
       </div>
-      <div class="d-flex flex-row align-items-center pe-3">
-        <button mat-raised-button (click)="createIncome()" color="primary" class="me-3">Entrada</button>
-        <button mat-raised-button color="warn" (click)="createExpense()">Salida</button>
+      <div class="d-flex flex-row align-items-center pe-3" *ngIf="assistant">
+        <button mat-raised-button (click)="createIncome()" color="primary" class="me-3 br-100">Entrada</button>
+        <button mat-raised-button color="warn" (click)="createExpense()" class="br-100">Salida</button>
       </div>
     </div>
     <div class="d-flex justify-content-center" *ngIf="assistant && period">
@@ -19,10 +19,6 @@
         <div class="d-flex">
           <p class="me-1 text-muted">Cuenta</p>
           <p>{{ assistant.accountNumber }}</p>
-        </div>
-        <div class="d-flex">
-          <p class="me-1 text-muted">Periodo</p>
-          <p>{{ period.startDate | date }}/{{ period.endDate | date }}</p>
         </div>
         <div class="d-flex">
           <p class="me-1 text-muted">Monto Inicial</p>
@@ -41,13 +37,51 @@
     <div *ngIf="!assistant" class="d-flex flex-column justify-content-center align-items-center">
       <h2 class="text-muted">Parece que aun no cuentas con un auxiliar bancario</h2>
       <p class="text-muted mb-4">Si quieres comenzar a registrar entradas y salidas de tu cuenta selecciona "crear".</p>
-      <button id="btnCreate" mat-raised-button color="primary" (click)="createAssistant()">Crear</button>
+      <button id="btnCreate" mat-raised-button color="primary" (click)="createAssistant()" class="br-100">Crear</button>
     </div>
 
     <div *ngIf="assistant">
-      <div class="d-flex justify-content-center align-items-center" *ngIf="movements.model.length == 0">No hay Movimientos Registrados</div>
+      <mat-card class="w-desktop">
+        <div class="d-flex justify-content-evenly align-items-center w-full">
+          <!--date-->
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Busca por Fecha</mat-label>
+            <mat-date-range-input [rangePicker]="campaignOnePicker" [comparisonStart]="search.startDate" [comparisonEnd]="search.endDate">
+              <input matStartDate placeholder="Start date" [(ngModel)]="search.startDate" />
+              <input matEndDate placeholder="End date" [(ngModel)]="search.endDate" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+          </mat-form-field>
+          <!--name-->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" [(ngModel)]="search.name" />
+          </mat-form-field>
+          <!--concept-->
+          <mat-form-field appearance="outline">
+            <mat-label>Concepto</mat-label>
+            <input matInput placeholder="Concepto" [(ngModel)]="search.concept" />
+          </mat-form-field>
+          <!--type-->
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <select matNativeControl required [(ngModel)]="search.type">
+              <option value="">Todos</option>
+              <option value="income">{{ global.INCOME }}</option>
+              <option value="expense">{{ global.EXPENSE }}</option>
+            </select>
+          </mat-form-field>
+          <!--search-->
+          <div class="d-flex">
+            <button mat-flat-button color="primary" class="mb-3 br-100 me-3" (click)="searchMovement()">Buscar</button>
+            <button mat-flat-button color="accent" class="mb-3 br-100" (click)="export()">Export</button>
+          </div>
+        </div>
+      </mat-card>
 
-      <mat-card *ngIf="assistant && movements.model.length > 0" class="scroll-x w-desktop">
+      <!--table-->
+      <mat-card class="scroll-x w-desktop">
         <table mat-table [dataSource]="movements.model" matSort class="flex-auto table w-full" (matSortChange)="sort($event)">
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'createdAt'">Fecha</th>
@@ -56,7 +90,7 @@
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'name'">Nombre</th>
-            <td mat-cell *matCellDef="let element">Aqui va el nombre</td>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
           </ng-container>
           <ng-container matColumnDef="concept">
             <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'concept'">Concepto</th>
@@ -72,6 +106,15 @@
           <ng-container matColumnDef="amount">
             <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'amount'">Monto</th>
             <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="delete(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

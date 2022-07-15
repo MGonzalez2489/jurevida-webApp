@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FinancialAssistantModel } from '@core/models/database';
-import { distinctUntilChanged, Observable, Subscriber } from 'rxjs';
+import { GLOBAL } from '@global/globals';
 import { MovementsService } from '../../services/movements.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { MovementsService } from '../../services/movements.service';
 })
 export class CreateExpenseComponent implements OnInit, OnDestroy {
   assistant: FinancialAssistantModel = new FinancialAssistantModel();
+  global = GLOBAL;
   form: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     amount: new FormControl(0, [Validators.required]),

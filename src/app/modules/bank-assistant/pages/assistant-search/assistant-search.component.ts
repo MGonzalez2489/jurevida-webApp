@@ -4,8 +4,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { FinancialAssistantModel, FinancialMovementModel, FinancialPeriodModel } from '@core/models/database';
 import { ResultListModel } from '@core/models/responses';
-import { BaseSearchCriteria } from '@core/models/searchCriteria';
+import { MovementSearchCriteria } from '@core/models/searchCriteria/movement-search-criteria';
+import { environment } from '@environment/environment';
 import { GLOBAL } from '@global/globals';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { Subscription } from 'rxjs';
 import { CreateAssistantModalComponent } from '../../components/create-assistant-modal/create-assistant-modal.component';
 import { CreateExpenseComponent } from '../../components/create-expense/create-expense.component';
@@ -23,11 +25,11 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   assistant: FinancialAssistantModel;
   period: FinancialPeriodModel;
   movements: ResultListModel<FinancialMovementModel> = new ResultListModel<FinancialMovementModel>();
-  displayedColumns: string[] = ['date', 'name', 'concept', 'type', 'amount'];
+  displayedColumns: string[] = ['date', 'name', 'concept', 'type', 'amount', 'actions'];
   assistantSubscription: Subscription;
   movementSubscription: Subscription;
   periodSubscription: Subscription;
-  search: BaseSearchCriteria = new BaseSearchCriteria();
+  search: MovementSearchCriteria = new MovementSearchCriteria();
   global = GLOBAL;
   constructor(
     private dialog: MatDialog,
@@ -50,20 +52,19 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   load(): void {
     this.assistantSubscription = this.assistantService.bankAssistant$().subscribe((data) => {
       this.assistant = data;
-      console.log('assistant', data);
     });
     this.periodSubscription = this.periodService.connectPeriod$().subscribe((data) => {
       this.period = data;
-      console.log('period', data);
     });
     this.movementSubscription = this.movementService.connectBankMovements$().subscribe((data) => {
       this.movements = data;
+      console.log('movements', data);
       this.search.totalPages = data.totalPages;
       this.search.totalRecords = data.totalRecords;
     });
   }
   createAssistant(): void {
-    this.dialog.open(CreateAssistantModalComponent);
+    this.dialog.open(CreateAssistantModalComponent, { data: { isPrettyCash: false } });
   }
   createIncome(): void {
     this.dialog.open(CreateIncomeComponent, { data: this.assistant });
@@ -80,5 +81,37 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     this.search.orderBy = event.active;
     this.search.orderDir = event.direction;
     this.movementService.search(this.search);
+  }
+
+  searchMovement() {
+    this.movementService.search(this.search);
+  }
+  export() {
+    this.movementService.export().subscribe(
+      (data) => {
+        console.log('response export', data);
+
+        window.open(`${environment.baseUrl}public${data.model}`);
+      },
+      (error) => {
+        console.log('error eport', error);
+      }
+    );
+  }
+  delete(movement: FinancialMovementModel): void {
+    const movementType = movement.type == 'income' ? this.global.INCOME : this.global.EXPENSE;
+    const title = `Desea eliminar este ${movementType}?`;
+    const description = `Recuerde que eliminar un movimiento es una accion irreversible y afectara el balance actual.`;
+    const dialog = this.dialog.open(ConfirmationModalComponent, {
+      panelClass: 'confirmation-modal',
+      data: { title: title, description: description }
+    });
+
+    dialog.afterClosed().subscribe((data) => {
+      console.log('dialog response', data);
+      if (data) {
+        this.movementService.delete(movement.publicId);
+      }
+    });
   }
 }

@@ -4,3 +4,8 @@
 .expense {
   color: #ed6666;
 }
+
+::ng-depp .el-modal {
+  background-color: red !important;
+  max-width: 100% !important;
+}
