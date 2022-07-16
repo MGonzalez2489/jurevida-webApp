@@ -6,3 +6,8 @@ export * from './password.service';
 
 //users
 export * from './sponsors.service';
+
+//Financial
+export * from './assistant.service';
+export * from './period.service';
+export * from './movements.service';

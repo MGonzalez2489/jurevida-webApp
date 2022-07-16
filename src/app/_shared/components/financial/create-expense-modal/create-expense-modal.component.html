@@ -4,15 +4,15 @@
   <form class="d-flex flex-column" [formGroup]="form" (submit)="submit()">
     <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Nombre del Contribuyente" formControlName="name" />
+      <input matInput placeholder="Nombre" formControlName="name" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Cantidad</mat-label>
-      <input matInput placeholder="Nombre del Contribuyente" type="number" formControlName="amount" />
+      <input matInput placeholder="Cantidad" type="number" formControlName="amount" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Concepto</mat-label>
-      <textarea matInput placeholder="Nombre del Contribuyente" formControlName="concept" rows="4"></textarea>
+      <textarea matInput placeholder="Cantidad" formControlName="concept" rows="4"></textarea>
     </mat-form-field>
     <div class="d-flex justify-content-center align-items-center w-full mt-5" mat-dialog-actions>
       <button mat-button color="primary" type="button" class="me-4" (click)="cancel()">Cancelar</button>

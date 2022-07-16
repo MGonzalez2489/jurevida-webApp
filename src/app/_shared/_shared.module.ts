@@ -22,6 +22,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { CreateAssistantModalComponent } from './components/financial/create-assistant-modal/create-assistant-modal.component';
+import { CreateExpenseModalComponent } from './components/financial/create-expense-modal/create-expense-modal.component';
+import { CreateIncomeModalComponent } from './components/financial/create-income-modal/create-income-modal.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,10 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     DatePipe,
     ImgPlaceholderDirective,
     ResetPasswordModalComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    CreateAssistantModalComponent,
+    CreateIncomeModalComponent,
+    CreateExpenseModalComponent
   ],
   imports: [
     CommonModule,
@@ -48,8 +56,18 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     HttpClientModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatAutocompleteModule,
+    MatCheckboxModule
   ],
-  exports: [StopPropagationDirective, PhonePipe, ImgPlaceholderDirective, ConfirmationModalComponent]
+  exports: [
+    StopPropagationDirective,
+    PhonePipe,
+    ImgPlaceholderDirective,
+    ConfirmationModalComponent,
+    CreateAssistantModalComponent,
+    CreateExpenseModalComponent,
+    CreateIncomeModalComponent
+  ]
 })
 export class SharedModule {}

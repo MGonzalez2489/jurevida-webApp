@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AssistantService } from '../../services/assistant.service';
+import { AssistantService } from '@core/services';
 
 @Component({
   selector: 'app-create-assistant-modal',
@@ -14,29 +13,29 @@ export class CreateAssistantModalComponent implements OnInit {
   form: FormGroup = new FormGroup({
     bank: new FormControl(null),
     accountNumber: new FormControl(null),
-    isPrettyCash: new FormControl(false, [Validators.required]),
+    isPettyCash: new FormControl(false, [Validators.required]),
     amount: new FormControl(0, [Validators.required])
   });
   constructor(
     private dialogRef: MatDialogRef<CreateAssistantModalComponent>,
     private assistantService: AssistantService,
-    @Inject(MAT_DIALOG_DATA) public data: { isPrettyCash: boolean }
+    @Inject(MAT_DIALOG_DATA) public data: { isPettyCash: boolean }
   ) {}
 
   ngOnInit(): void {
-    const isPrettyCash = this.data.isPrettyCash;
-    if (isPrettyCash) {
+    const isPettyCash = this.data.isPettyCash;
+    if (isPettyCash) {
       this.title = 'Nuevo Auxiliar de Caja';
     }
-    this.form.patchValue({ isPrettyCash });
-    this.setPettyCash(isPrettyCash);
+    this.form.patchValue({ isPettyCash });
+    this.setPettyCash(isPettyCash);
   }
   submit(): void {
     if (!this.form.valid) {
       return;
     }
     this.assistantService.postCreate(this.form.value);
-    this.assistantService.bankAssistant$().subscribe((data) => {
+    this.assistantService.connectBankAssistant$().subscribe((data) => {
       this.dialogRef.close();
     });
   }
@@ -44,10 +43,10 @@ export class CreateAssistantModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  setPettyCash(isPrettyCash: boolean): void {
+  setPettyCash(isPettyCash: boolean): void {
     this.form.patchValue({ bank: null });
     this.form.patchValue({ accountNumber: null });
-    if (isPrettyCash) {
+    if (isPettyCash) {
       this.form.controls['bank'].addValidators(Validators.required);
       this.form.controls['accountNumber'].addValidators(Validators.required);
     } else {

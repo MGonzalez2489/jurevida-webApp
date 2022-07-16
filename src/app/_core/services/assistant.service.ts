@@ -17,16 +17,16 @@ export class AssistantService {
   }
 
   private loadBank(): void {
-    this.requestService.get<FinancialAssistantModel>('financial/assistant/bank').subscribe((data) => {
+    this.requestService.get<FinancialAssistantModel>(`assistant/bank`).subscribe((data) => {
       this.bankSub$.next(data.model);
     });
   }
-  bankAssistant$(): Observable<FinancialAssistantModel> {
+  connectBankAssistant$(): Observable<FinancialAssistantModel> {
     return this.bankSub$.asObservable();
   }
 
-  postCreate(newAssistant: { bank: string; accountNumber: string; isPrettyCash: boolean; amount: number }): void {
-    this.requestService.post('financial/assistant', newAssistant).subscribe((data) => {
+  postCreate(newAssistant: { bank: string; accountNumber: string; isPettyCash: boolean; amount: number }): void {
+    this.requestService.post('assistant', newAssistant).subscribe((data) => {
       this.periodService.initialize();
       this.loadBank();
     });

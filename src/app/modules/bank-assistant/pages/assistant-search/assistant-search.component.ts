@@ -5,16 +5,14 @@ import { Sort } from '@angular/material/sort';
 import { FinancialAssistantModel, FinancialMovementModel, FinancialPeriodModel } from '@core/models/database';
 import { ResultListModel } from '@core/models/responses';
 import { MovementSearchCriteria } from '@core/models/searchCriteria/movement-search-criteria';
+import { AssistantService, MovementsService, PeriodService } from '@core/services';
 import { environment } from '@environment/environment';
 import { GLOBAL } from '@global/globals';
 import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
+import { CreateAssistantModalComponent } from '@shared/components/financial/create-assistant-modal/create-assistant-modal.component';
+import { CreateExpenseModalComponent } from '@shared/components/financial/create-expense-modal/create-expense-modal.component';
+import { CreateIncomeModalComponent } from '@shared/components/financial/create-income-modal/create-income-modal.component';
 import { Subscription } from 'rxjs';
-import { CreateAssistantModalComponent } from '../../components/create-assistant-modal/create-assistant-modal.component';
-import { CreateExpenseComponent } from '../../components/create-expense/create-expense.component';
-import { CreateIncomeComponent } from '../../components/create-income/create-income.component';
-import { AssistantService } from '../../services/assistant.service';
-import { MovementsService } from '../../services/movements.service';
-import { PeriodService } from '../../services/period.service';
 
 @Component({
   selector: 'app-assistant-search',
@@ -41,7 +39,7 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.assistantService.initialize();
     this.periodService.initialize();
-    this.movementService.initialize();
+    this.movementService.initializeBankMovements();
     this.load();
   }
   ngOnDestroy(): void {
@@ -50,10 +48,10 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     this.movementSubscription.unsubscribe();
   }
   load(): void {
-    this.assistantSubscription = this.assistantService.bankAssistant$().subscribe((data) => {
+    this.assistantSubscription = this.assistantService.connectBankAssistant$().subscribe((data) => {
       this.assistant = data;
     });
-    this.periodSubscription = this.periodService.connectPeriod$().subscribe((data) => {
+    this.periodSubscription = this.periodService.connectBankPeriod$().subscribe((data) => {
       this.period = data;
     });
     this.movementSubscription = this.movementService.connectBankMovements$().subscribe((data) => {
@@ -64,34 +62,34 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     });
   }
   createAssistant(): void {
-    this.dialog.open(CreateAssistantModalComponent, { data: { isPrettyCash: false } });
+    this.dialog.open(CreateAssistantModalComponent, { data: { isPettyCash: false } });
   }
   createIncome(): void {
-    this.dialog.open(CreateIncomeComponent, { data: this.assistant });
+    this.dialog.open(CreateIncomeModalComponent, { data: this.assistant });
   }
   createExpense(): void {
-    this.dialog.open(CreateExpenseComponent, { data: this.assistant });
+    this.dialog.open(CreateExpenseModalComponent, { data: { assistant: this.assistant, period: this.period } });
   }
   changePage(event: PageEvent) {
     this.search.page = event.pageIndex + 1;
     this.search.perPage = event.pageSize;
-    this.movementService.search(this.search);
+    this.movementService.searchBankMovements(this.search);
   }
   sort(event: Sort) {
     this.search.orderBy = event.active;
     this.search.orderDir = event.direction;
-    this.movementService.search(this.search);
+    this.movementService.searchBankMovements(this.search);
   }
 
   searchMovement() {
-    this.movementService.search(this.search);
+    this.movementService.searchBankMovements(this.search);
   }
   export() {
-    this.movementService.export().subscribe(
+    this.movementService.export(this.assistant.publicId).subscribe(
       (data) => {
         console.log('response export', data);
 
-        window.open(`${environment.baseUrl}public${data.model}`);
+        window.open(`${environment.baseUrl}${data.model}`);
       },
       (error) => {
         console.log('error eport', error);
@@ -110,7 +108,7 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     dialog.afterClosed().subscribe((data) => {
       console.log('dialog response', data);
       if (data) {
-        this.movementService.delete(movement.publicId);
+        this.movementService.delete(movement.publicId, this.assistant.isPettyCash);
       }
     });
   }

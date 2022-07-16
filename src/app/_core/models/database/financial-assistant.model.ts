@@ -4,6 +4,6 @@ import { FinancialPeriodModel } from './financial-period.model';
 export class FinancialAssistantModel extends BaseModel {
   bank: string = '';
   accountNumber: string = '';
-  isPrettyCash: boolean = false;
+  isPettyCash: boolean = false;
   periods: Array<FinancialPeriodModel> = [];
 }

@@ -3,11 +3,11 @@
   <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
 
   <form (submit)="submit()" [formGroup]="form" class="w-full mt-4">
-    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPrettyCash">
+    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPettyCash">
       <mat-label>Nombre del Banco</mat-label>
       <input matInput placeholder="Nombre del banco" formControlName="bank" autofocus />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPrettyCash">
+    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPettyCash">
       <mat-label>Numero de Cuenta</mat-label>
       <input matInput placeholder="Numero de la cuenta bancaria" formControlName="accountNumber" autofocus />
     </mat-form-field>

@@ -3,19 +3,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FinancialAssistantModel, UserModel } from '@core/models/database';
 import { BaseSearchCriteria } from '@core/models/searchCriteria';
-import { SponsorsService } from '@core/services';
+import { MovementsService, SponsorsService } from '@core/services';
 import { GLOBAL } from '@global/globals';
 import { Subscription } from 'rxjs';
-import { MovementsService } from '../../services/movements.service';
 
 @Component({
   selector: 'app-create-income',
-  templateUrl: './create-income.component.html',
-  styleUrls: ['./create-income.component.scss']
+  templateUrl: './create-income-modal.component.html',
+  styleUrls: ['./create-income-modal.component.scss']
 })
-export class CreateIncomeComponent implements OnInit, OnDestroy {
+export class CreateIncomeModalComponent implements OnInit, OnDestroy {
   assistant: FinancialAssistantModel = new FinancialAssistantModel();
   sponsorSubscription: Subscription;
+  postSubscription: Subscription;
   sponsors: UserModel[] = [];
   global = GLOBAL;
   form: FormGroup = new FormGroup({
@@ -25,15 +25,15 @@ export class CreateIncomeComponent implements OnInit, OnDestroy {
     existingSponsor: new FormControl(true, [Validators.required])
   });
   constructor(
-    private dialogRef: MatDialogRef<CreateIncomeComponent>,
+    private dialogRef: MatDialogRef<CreateIncomeModalComponent>,
     private movementService: MovementsService,
     private sponsorsService: SponsorsService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.sponsorsService.initialize();
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.sponsorsService.initialize();
+
     this.assistant = this.data;
     this.sponsorSubscription = this.sponsorsService.connect$().subscribe((data) => {
       this.sponsors = data.model;
@@ -41,6 +41,9 @@ export class CreateIncomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sponsorSubscription.unsubscribe();
+    if (this.postSubscription) {
+      this.postSubscription.unsubscribe();
+    }
   }
   submit(): void {
     if (this.form.invalid) {
@@ -66,11 +69,17 @@ export class CreateIncomeComponent implements OnInit, OnDestroy {
     } else {
       formValue.name = this.form.value.sponsor;
     }
-
-    this.movementService.createIncome(this.assistant.publicId, formValue).subscribe((data) => {
-      this.sponsorsService.initialize();
-      this.dialogRef.close();
-    });
+    if (this.assistant.isPettyCash) {
+      this.postSubscription = this.movementService.createPettyIncome(this.assistant.publicId, formValue).subscribe(() => {
+        this.sponsorsService.initialize();
+        this.dialogRef.close();
+      });
+    } else {
+      this.postSubscription = this.movementService.createBankIncome(this.assistant.publicId, formValue).subscribe(() => {
+        this.sponsorsService.initialize();
+        this.dialogRef.close();
+      });
+    }
   }
   cancel(): void {
     this.dialogRef.close();
