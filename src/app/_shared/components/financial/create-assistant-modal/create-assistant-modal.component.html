@@ -1,25 +1,32 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
   <h1>{{ title }}</h1>
-  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
 
   <form (submit)="submit()" [formGroup]="form" class="w-full mt-4">
-    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPettyCash">
+    <mat-form-field class="w-full" appearance="outline" *ngIf="!form.value.isPettyCash">
       <mat-label>Nombre del Banco</mat-label>
       <input matInput placeholder="Nombre del banco" formControlName="bank" autofocus />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full" *ngIf="!form.value.isPettyCash">
+
+    <mat-form-field class="w-full" *ngIf="!form.value.isPettyCash" appearance="outline">
       <mat-label>Numero de Cuenta</mat-label>
-      <input matInput placeholder="Numero de la cuenta bancaria" formControlName="accountNumber" autofocus />
+      <input matInput placeholder="Numero de la cuenta bancaria" formControlName="accountNumber" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-full">
+    <mat-form-field class="w-full" appearance="outline">
       <mat-label>Monto Inicial</mat-label>
-      <input matInput type="number" formControlName="amount" autofocus />
+      <input matInput type="number" formControlName="amount" />
     </mat-form-field>
+
+    <div *ngIf="formSubmited" class="text-center">
+      <mat-error *ngIf="cForm['bank'].errors && cForm['bank'].errors['required']">Es necesario indicar el nombre del banco.</mat-error>
+      <mat-error *ngIf="cForm['accountNumber'].errors && cForm['accountNumber'].errors['required']"
+        >Es necesario indicar el numero de cuenta.</mat-error
+      >
+    </div>
 
     <div class="d-flex justify-content-center align-items-center w-full mt-5" mat-dialog-actions>
-      <button mat-button color="primary" type="button" class="me-4" (click)="cancel()">Cancelar</button>
-      <button type="submit" mat-raised-button color="primary">Crear</button>
+      <button mat-button color="primary" type="button" class="me-4 br-100" (click)="cancel()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary" class="br-100">Crear</button>
     </div>
   </form>
 </div>

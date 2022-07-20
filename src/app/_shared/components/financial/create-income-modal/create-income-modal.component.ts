@@ -19,11 +19,16 @@ export class CreateIncomeModalComponent implements OnInit, OnDestroy {
   sponsors: UserModel[] = [];
   global = GLOBAL;
   form: FormGroup = new FormGroup({
-    amount: new FormControl(0, [Validators.required]),
-    concept: new FormControl(null, [Validators.required]),
     sponsor: new FormControl(null, [Validators.required]),
+    amount: new FormControl(0, [Validators.required, Validators.min(1)]),
+    concept: new FormControl(null, [Validators.required]),
     existingSponsor: new FormControl(true, [Validators.required])
   });
+  get cForm() {
+    return this.form.controls;
+  }
+
+  formSubmited: boolean = false;
   constructor(
     private dialogRef: MatDialogRef<CreateIncomeModalComponent>,
     private movementService: MovementsService,
@@ -46,6 +51,7 @@ export class CreateIncomeModalComponent implements OnInit, OnDestroy {
     }
   }
   submit(): void {
+    this.formSubmited = true;
     if (this.form.invalid) {
       return;
     }

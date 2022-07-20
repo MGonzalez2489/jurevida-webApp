@@ -12,8 +12,10 @@ export class PeriodService {
 
   constructor(private requestService: RequestService) {}
 
-  initialize(): void {
+  initializeBank(): void {
     this.loadBankPeriod();
+  }
+  initializePettyCash(): void {
     this.loadPettyCashPeriod();
   }
 

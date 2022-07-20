@@ -27,7 +27,11 @@ export class AssistantService {
 
   postCreate(newAssistant: { bank: string; accountNumber: string; isPettyCash: boolean; amount: number }): void {
     this.requestService.post('assistant', newAssistant).subscribe((data) => {
-      this.periodService.initialize();
+      if (newAssistant.isPettyCash) {
+        this.periodService.initializePettyCash();
+      } else {
+        this.periodService.initializeBank();
+      }
       this.loadBank();
     });
   }

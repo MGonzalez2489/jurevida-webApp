@@ -41,7 +41,7 @@ export class MovementsService {
   createBankIncome(assistantId: string, income: { amount: number; concept: string }): Observable<ResultModel<FinancialMovementModel>> {
     return this.requestService.post<FinancialMovementModel>(`assistant/${assistantId}/income`, income).pipe(
       tap(() => {
-        this.periodService.initialize();
+        this.periodService.initializeBank();
         this.searchBankMoves();
         this.notificationService.openMessage(`${this.global.INCOME} creado exitosamente.`);
       })
@@ -50,7 +50,7 @@ export class MovementsService {
   createBankExpense(assistantId: string, expense: { amount: number; concept: string }): Observable<ResultModel<FinancialMovementModel>> {
     return this.requestService.post<FinancialMovementModel>(`assistant/${assistantId}/expense`, expense).pipe(
       tap(() => {
-        this.periodService.initialize();
+        this.periodService.initializeBank();
         this.searchBankMoves();
         this.notificationService.openMessage(`${this.global.EXPENSE} creado exitosamente.`);
       })
@@ -73,7 +73,7 @@ export class MovementsService {
   createPettyIncome(assistantId: string, income: { amount: number; concept: string }): Observable<ResultModel<FinancialMovementModel>> {
     return this.requestService.post<FinancialMovementModel>(`assistant/${assistantId}/income`, income).pipe(
       tap(() => {
-        this.periodService.initialize();
+        this.periodService.initializePettyCash();
         this.searchPettyMoves();
         this.notificationService.openMessage(`${this.global.INCOME} creado exitosamente.`);
       })
@@ -82,7 +82,7 @@ export class MovementsService {
   createPettyExpense(assistantId: string, expense: { amount: number; concept: string }): Observable<ResultModel<FinancialMovementModel>> {
     return this.requestService.post<FinancialMovementModel>(`assistant/${assistantId}/expense`, expense).pipe(
       tap(() => {
-        this.periodService.initialize();
+        this.periodService.initializePettyCash();
         this.searchPettyMoves();
         this.notificationService.openMessage(`${this.global.EXPENSE} creado exitosamente.`);
       })
@@ -91,16 +91,17 @@ export class MovementsService {
 
   // General
 
-  export(assistantId: string): Observable<ResultModel<boolean>> {
-    return this.requestService.get<boolean>(`assistant/${assistantId}/movement/export`);
+  export(assistantId: string, movementSearch: MovementSearchCriteria): Observable<ResultModel<boolean>> {
+    return this.requestService.get<boolean>(`assistant/${assistantId}/movement/export`, movementSearch);
   }
 
   delete(publicId: string, isPettyAssistant: boolean): void {
     this.requestService.delete(`movement/${publicId}`).subscribe((data) => {
-      this.periodService.initialize();
       if (isPettyAssistant) {
+        this.periodService.initializePettyCash();
         this.searchPettyMoves();
       } else {
+        this.periodService.initializeBank();
         this.searchBankMoves();
       }
       this.notificationService.openMessage(`Movimiento eliminado exitosamente.`);

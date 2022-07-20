@@ -38,7 +38,7 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.assistantService.initialize();
-    this.periodService.initialize();
+    this.periodService.initializeBank();
     this.movementService.initializeBankMovements();
     this.load();
   }
@@ -56,7 +56,6 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     });
     this.movementSubscription = this.movementService.connectBankMovements$().subscribe((data) => {
       this.movements = data;
-      console.log('movements', data);
       this.search.totalPages = data.totalPages;
       this.search.totalRecords = data.totalRecords;
     });
@@ -84,18 +83,28 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   searchMovement() {
     this.movementService.searchBankMovements(this.search);
   }
-  export() {
-    this.movementService.export(this.assistant.publicId).subscribe(
-      (data) => {
-        console.log('response export', data);
 
+  exportCurrentPeriod(): void {
+    const periodSearch = new MovementSearchCriteria();
+    const currentYear = new Date().getFullYear();
+    periodSearch.startDate = new Date(currentYear, 0, 1, 0, 0, 0, 0).toLocaleString();
+    periodSearch.endDate = new Date(currentYear, 11, 31, 59, 59, 59, 999).toLocaleString();
+    this.movementService.export(this.assistant.publicId, periodSearch).subscribe(
+      (data) => {
         window.open(`${environment.baseUrl}${data.model}`);
       },
-      (error) => {
-        console.log('error eport', error);
-      }
+      (error) => {}
     );
   }
+  exportCurrentSearch(): void {
+    this.movementService.export(this.assistant.publicId, this.search).subscribe(
+      (data) => {
+        window.open(`${environment.baseUrl}${data.model}`);
+      },
+      (error) => {}
+    );
+  }
+
   delete(movement: FinancialMovementModel): void {
     const movementType = movement.type == 'income' ? this.global.INCOME : this.global.EXPENSE;
     const title = `Desea eliminar este ${movementType}?`;
@@ -106,7 +115,6 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     });
 
     dialog.afterClosed().subscribe((data) => {
-      console.log('dialog response', data);
       if (data) {
         this.movementService.delete(movement.publicId, this.assistant.isPettyCash);
       }

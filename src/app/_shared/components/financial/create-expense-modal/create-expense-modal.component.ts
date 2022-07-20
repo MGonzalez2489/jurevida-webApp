@@ -18,9 +18,14 @@ export class CreateExpenseModalComponent implements OnInit, OnDestroy {
   global = GLOBAL;
   form: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    amount: new FormControl(0, [Validators.required]),
+    amount: new FormControl(0, [Validators.required, Validators.min(1)]),
     concept: new FormControl(null, [Validators.required])
   });
+  formSubmited: boolean = false;
+  get cForm() {
+    return this.form.controls;
+  }
+
   constructor(
     private dialogRef: MatDialogRef<CreateExpenseModalComponent>,
     private movementService: MovementsService,
@@ -38,6 +43,7 @@ export class CreateExpenseModalComponent implements OnInit, OnDestroy {
     }
   }
   submit(): void {
+    this.formSubmited = true;
     if (this.form.invalid) {
       return;
     }

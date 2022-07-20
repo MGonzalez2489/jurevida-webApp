@@ -75,13 +75,22 @@
           <!--search-->
           <div class="d-flex">
             <button mat-flat-button color="primary" class="mb-3 br-100 me-3" (click)="searchMovement()">Buscar</button>
-            <button mat-flat-button color="accent" class="mb-3 br-100" (click)="export()">Export</button>
           </div>
         </div>
       </mat-card>
 
       <!--table-->
       <mat-card class="scroll-x w-desktop">
+        <div class="d-flex justify-content-end">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="exportCurrentPeriod()">Periodo Actual</button>
+            <button mat-menu-item (click)="exportCurrentSearch()">Busqueda Actual</button>
+          </mat-menu>
+        </div>
+
         <table mat-table [dataSource]="movements.model" matSort class="flex-auto table w-full" (matSortChange)="sort($event)">
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef [mat-sort-header]="'createdAt'">Fecha</th>

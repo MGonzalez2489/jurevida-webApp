@@ -6,4 +6,7 @@ export class MovementSearchCriteria extends BaseSearchCriteria {
   name: string = '';
   concept: string = '';
   type: string | 'income' | 'expense' = '';
+
+  lowerAmount: number = 0;
+  higherAmount: number = 0
 }

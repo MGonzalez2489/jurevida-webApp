@@ -1,6 +1,6 @@
 <div class="d-flex flex-column">
   <h1>Nuevo {{ global.INCOME }}</h1>
-  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
+  <p class="text-muted">Un deposito puede ser asignado a un patrocinador como parte de un donativo.</p>
   <form class="d-flex flex-column" [formGroup]="form" (submit)="submit()">
     <mat-checkbox class="mt-2 mb-4" (change)="changeSponsorType()" formControlName="existingSponsor">Patrocinador Registrado</mat-checkbox>
     <div>
@@ -27,7 +27,18 @@
       <mat-label>Concepto</mat-label>
       <textarea matInput placeholder="Nombre del Contribuyente" formControlName="concept" rows="4"></textarea>
     </mat-form-field>
-    <div class="d-flex justify-content-center align-items-center w-full mt-5" mat-dialog-actions>
+    <div *ngIf="formSubmited" class="text-center">
+      <mat-error *ngIf="cForm['sponsor'].errors && cForm['sponsor'].errors['required']">
+        Es necesario indicar el patrocinador del deposito.</mat-error
+      >
+      <mat-error *ngIf="cForm['amount'].errors">
+        <span *ngIf="cForm['amount'].errors['required']">Es necesario indicar el monto.</span>
+        <span *ngIf="cForm['amount'].errors['min']">El monto minimo es 1.</span>
+      </mat-error>
+      <mat-error *ngIf="cForm['concept'].errors && cForm['concept'].errors['required']"> Es necesario indicar el concepto del deposito.</mat-error>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center w-full" mat-dialog-actions>
       <button mat-button color="primary" type="button" class="me-4" (click)="cancel()">Cancelar</button>
       <button type="submit" mat-raised-button color="primary">Crear</button>
     </div>

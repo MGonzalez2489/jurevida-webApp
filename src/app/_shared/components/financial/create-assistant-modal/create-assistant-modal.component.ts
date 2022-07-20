@@ -10,12 +10,17 @@ import { AssistantService } from '@core/services';
 })
 export class CreateAssistantModalComponent implements OnInit {
   title: string = 'Nuevo Auxiliar de Banco';
+  formSubmited: boolean = false;
   form: FormGroup = new FormGroup({
     bank: new FormControl(null),
     accountNumber: new FormControl(null),
     isPettyCash: new FormControl(false, [Validators.required]),
     amount: new FormControl(0, [Validators.required])
   });
+
+  get cForm() {
+    return this.form.controls;
+  }
   constructor(
     private dialogRef: MatDialogRef<CreateAssistantModalComponent>,
     private assistantService: AssistantService,
@@ -31,6 +36,7 @@ export class CreateAssistantModalComponent implements OnInit {
     this.setPettyCash(isPettyCash);
   }
   submit(): void {
+    this.formSubmited = true;
     if (!this.form.valid) {
       return;
     }
@@ -46,7 +52,7 @@ export class CreateAssistantModalComponent implements OnInit {
   setPettyCash(isPettyCash: boolean): void {
     this.form.patchValue({ bank: null });
     this.form.patchValue({ accountNumber: null });
-    if (isPettyCash) {
+    if (!isPettyCash) {
       this.form.controls['bank'].addValidators(Validators.required);
       this.form.controls['accountNumber'].addValidators(Validators.required);
     } else {
