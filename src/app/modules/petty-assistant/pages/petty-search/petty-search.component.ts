@@ -15,11 +15,11 @@ import { CreateIncomeModalComponent } from '@shared/components/financial/create-
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-assistant-search',
-  templateUrl: './assistant-search.component.html',
-  styleUrls: ['./assistant-search.component.scss']
+  selector: 'app-petty-search',
+  templateUrl: './petty-search.component.html',
+  styleUrls: ['./petty-search.component.scss']
 })
-export class AssistantSearchComponent implements OnInit, OnDestroy {
+export class PettySearchComponent implements OnInit, OnDestroy {
   assistant: FinancialAssistantModel;
   period: FinancialPeriodModel;
   movements: ResultListModel<FinancialMovementModel> = new ResultListModel<FinancialMovementModel>();
@@ -37,9 +37,9 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.assistantService.initializeBank();
-    this.periodService.initializeBank();
-    this.movementService.initializeBankMovements();
+    this.assistantService.initializePetty();
+    this.periodService.initializePettyCash();
+    this.movementService.initializePrettyMovements();
     this.load();
   }
   ngOnDestroy(): void {
@@ -48,20 +48,20 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     this.movementSubscription.unsubscribe();
   }
   load(): void {
-    this.assistantSubscription = this.assistantService.connectBankAssistant$().subscribe((data) => {
+    this.assistantSubscription = this.assistantService.connectPettyAssistant$().subscribe((data) => {
       this.assistant = data;
     });
-    this.periodSubscription = this.periodService.connectBankPeriod$().subscribe((data) => {
+    this.periodSubscription = this.periodService.connectPettyCashPeriod$().subscribe((data) => {
       this.period = data;
     });
-    this.movementSubscription = this.movementService.connectBankMovements$().subscribe((data) => {
+    this.movementSubscription = this.movementService.connectPettyCashMovements$().subscribe((data) => {
       this.movements = data;
       this.search.totalPages = data.totalPages;
       this.search.totalRecords = data.totalRecords;
     });
   }
   createAssistant(): void {
-    this.dialog.open(CreateAssistantModalComponent, { data: { isPettyCash: false } });
+    this.dialog.open(CreateAssistantModalComponent, { data: { isPettyCash: true } });
   }
   createIncome(): void {
     this.dialog.open(CreateIncomeModalComponent, { data: this.assistant });

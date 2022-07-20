@@ -35,3 +35,8 @@ mat-error {
 mat-error:first-child {
   display: block !important;
 }
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  //border-radius: 5px;
+}

@@ -40,16 +40,16 @@ export const MenuItems: iSideMenuItem[] = [
   {
     isTitle: false,
     text: 'Aux Bancario',
-    icon: 'supervisor_account',
+    icon: 'switch_camera',
     routerLink: '/assistant',
     disabled: false
-  }
+  },
 
-  //{
-  //isTitle: false,
-  //text: 'Aux Caja',
-  //icon: 'supervisor_account',
-  //routerLink: '/users',
-  //disabled: false
-  //}
+  {
+    isTitle: false,
+    text: 'Aux Caja',
+    icon: 'swap_vertical_circle',
+    routerLink: '/petty',
+    disabled: false
+  }
 ];

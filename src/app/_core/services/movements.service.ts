@@ -65,7 +65,7 @@ export class MovementsService {
     this.searchPettyMoves(params);
   }
   private searchPettyMoves(search?: MovementSearchCriteria): void {
-    this.requestService.getList<FinancialMovementModel>(`assistant/bank/movements`, search).subscribe((data) => {
+    this.requestService.getList<FinancialMovementModel>(`assistant/petty/movements`, search).subscribe((data) => {
       this.prettyCashMovementsSub$.next(data);
     });
   }

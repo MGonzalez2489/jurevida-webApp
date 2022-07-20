@@ -29,7 +29,12 @@ const routes: Routes = [
         path: 'assistant',
         loadChildren: () => import('./modules/bank-assistant/bank-assistant.module').then((m) => m.BankAssistantModule)
       },
-      { path: '', redirectTo: 'assistant', pathMatch: 'full' }
+      {
+        path: 'petty',
+        loadChildren: () => import('./modules/petty-assistant/petty-assistant.module').then((m) => m.PettyAssistantModule)
+      },
+
+      { path: '', redirectTo: 'petty', pathMatch: 'full' }
     ]
   }
 ];
