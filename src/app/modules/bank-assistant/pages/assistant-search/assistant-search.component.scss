@@ -5,7 +5,8 @@
   color: #ed6666;
 }
 
-::ng-depp .el-modal {
-  background-color: red !important;
-  max-width: 100% !important;
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0;
 }

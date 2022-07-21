@@ -22,6 +22,10 @@
       <mat-error *ngIf="cForm['accountNumber'].errors && cForm['accountNumber'].errors['required']"
         >Es necesario indicar el numero de cuenta.</mat-error
       >
+      <mat-error *ngIf="cForm['amount'].errors">
+        <span *ngIf="cForm['amount'].errors['required']">El monto es requerido.</span>
+        <span *ngIf="cForm['amount'].errors['min']">El monto minimo el 0.</span>
+      </mat-error>
     </div>
 
     <div class="d-flex justify-content-center align-items-center w-full mt-5" mat-dialog-actions>

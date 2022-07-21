@@ -34,7 +34,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/petty-assistant/petty-assistant.module').then((m) => m.PettyAssistantModule)
       },
 
-      { path: '', redirectTo: 'petty', pathMatch: 'full' }
+      { path: '', redirectTo: 'users', pathMatch: 'full' }
     ]
   }
 ];

@@ -17,8 +17,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
+import { DATE_FORMATS } from '@shared/others/date_formate_provider';
+import { Platform } from '@angular/cdk/platform';
+import { CustomDateAdapter } from '@shared/others/date_adapter';
 
 @NgModule({
   declarations: [AssistantSearchComponent],
@@ -42,6 +45,10 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     MatNativeDateModule,
     MatMenuModule
-  ]
+  ],
+  //providers: [
+    //{ provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE, Platform] },
+    //{ provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS }
+  //]
 })
 export class BankAssistantModule {}

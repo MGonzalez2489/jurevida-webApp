@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column expense-modal">
   <h1>Nuevo {{ global.EXPENSE }}</h1>
   <p class="text-muted">
     Monto disponible para retiros : <strong>{{ period.currentAmount | currency }}</strong>
@@ -21,6 +21,7 @@
       <mat-error *ngIf="cForm['amount'].errors">
         <span *ngIf="cForm['amount'].errors['required']">Es necesario indicar el monto.</span>
         <span *ngIf="cForm['amount'].errors['min']">El monto minimo es 1.</span>
+        <span *ngIf="cForm['amount'].errors['max']">El monto maximo que dispones para retirar es {{ period.currentAmount | currency }}.</span>
       </mat-error>
       <mat-error *ngIf="cForm['concept'].errors && cForm['concept'].errors['required']"> Es necesario indicar el concepto del deposito.</mat-error>
     </div>

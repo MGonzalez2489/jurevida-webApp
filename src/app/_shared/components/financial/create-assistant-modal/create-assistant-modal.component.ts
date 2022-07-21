@@ -15,7 +15,7 @@ export class CreateAssistantModalComponent implements OnInit {
     bank: new FormControl(null),
     accountNumber: new FormControl(null),
     isPettyCash: new FormControl(false, [Validators.required]),
-    amount: new FormControl(0, [Validators.required])
+    amount: new FormControl(0, [Validators.required, Validators.min(0)])
   });
 
   get cForm() {

@@ -4,5 +4,6 @@ export const GLOBAL = {
   NO_RECORDS: 'No se encontrarion registros',
   NOTIFICATION_DURATION: '5000',
   INCOME: 'Deposito',
-  EXPENSE: 'Retiro'
+  EXPENSE: 'Retiro',
+  END_PERIOD_TEXT: 'El periodo actual cerrara el 31 de Diciembre del anio en curso, todos los movimientos quedaran archivados.'
 };

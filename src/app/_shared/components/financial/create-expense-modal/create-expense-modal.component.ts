@@ -18,7 +18,7 @@ export class CreateExpenseModalComponent implements OnInit, OnDestroy {
   global = GLOBAL;
   form: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    amount: new FormControl(0, [Validators.required, Validators.min(1)]),
+    amount: new FormControl(0, [Validators.required, Validators.min(0)]),
     concept: new FormControl(null, [Validators.required])
   });
   formSubmited: boolean = false;
@@ -36,6 +36,7 @@ export class CreateExpenseModalComponent implements OnInit, OnDestroy {
     this.assistant = this.data.assistant;
     this.period = this.data.period;
     this.form.controls['amount'].addValidators(Validators.max(this.period.currentAmount));
+    this.form.controls['amount'].updateValueAndValidity();
   }
   ngOnDestroy(): void {
     if (this.subscription) {

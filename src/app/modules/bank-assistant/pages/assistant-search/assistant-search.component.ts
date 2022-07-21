@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, NativeDateModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
@@ -29,6 +30,7 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   periodSubscription: Subscription;
   search: MovementSearchCriteria = new MovementSearchCriteria();
   global = GLOBAL;
+  changePeriodMessage: string = '';
   constructor(
     private dialog: MatDialog,
     private assistantService: AssistantService,
@@ -53,6 +55,7 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
     });
     this.periodSubscription = this.periodService.connectBankPeriod$().subscribe((data) => {
       this.period = data;
+      this.endPeriodAlert();
     });
     this.movementSubscription = this.movementService.connectBankMovements$().subscribe((data) => {
       this.movements = data;
@@ -83,7 +86,10 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
   searchMovement(): void {
     this.movementService.searchBankMovements(this.search);
   }
-
+  endPeriodAlert(): void {
+    const nowMonth = new Date().getMonth();
+    this.changePeriodMessage = nowMonth == 11 ? this.global.END_PERIOD_TEXT : '';
+  }
   exportCurrentPeriod(): void {
     const periodSearch = new MovementSearchCriteria();
     const currentYear = new Date().getFullYear();
@@ -104,7 +110,14 @@ export class AssistantSearchComponent implements OnInit, OnDestroy {
       (error) => {}
     );
   }
-
+  clearSearch(): void {
+    this.search.type = '';
+    this.search.startDate = '';
+    this.search.endDate = '';
+    this.search.name = '';
+    this.search.concept = '';
+    this.searchMovement();
+  }
   delete(movement: FinancialMovementModel): void {
     const movementType = movement.type == 'income' ? this.global.INCOME : this.global.EXPENSE;
     const title = `Desea eliminar este ${movementType}?`;

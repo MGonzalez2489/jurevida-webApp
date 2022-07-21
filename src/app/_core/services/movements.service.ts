@@ -35,6 +35,11 @@ export class MovementsService {
   }
   private searchBankMoves(search?: MovementSearchCriteria): void {
     this.requestService.getList<FinancialMovementModel>(`assistant/bank/movements`, search).subscribe((data) => {
+      if (data.model.length === 0) {
+        this.bankMovementsSub$.next(new ResultListModel<FinancialMovementModel>());
+        return;
+      }
+
       this.bankMovementsSub$.next(data);
     });
   }
