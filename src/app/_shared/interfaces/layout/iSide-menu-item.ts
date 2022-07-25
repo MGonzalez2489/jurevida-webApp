@@ -5,4 +5,5 @@ export interface iSideMenuItem {
   routerLink: string;
   children?: Array<iSideMenuItem>;
   disabled: boolean;
+  forAdmin: boolean;
 }

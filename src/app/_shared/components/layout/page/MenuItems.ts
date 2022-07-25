@@ -6,43 +6,49 @@ export const MenuItems: iSideMenuItem[] = [
     text: 'Opciones',
     icon: '',
     routerLink: '',
-    disabled: false
+    disabled: false,
+    forAdmin: false
   },
   {
     isTitle: false,
     text: 'Sociedad',
     icon: 'group_work',
     routerLink: '/society',
-    disabled: false
+    disabled: false,
+    forAdmin: false
   },
-  //{
-  //isTitle: false,
-  //text: 'Finanzas',
-  //icon: 'show_chart',
-  //routerLink: '/finance',
-  //disabled: true
-  //},
+  {
+    isTitle: false,
+    text: 'Finanzas',
+    icon: 'show_chart',
+    routerLink: '/finance',
+    disabled: true,
+    forAdmin: false
+  },
   {
     isTitle: false,
     text: 'Documentos',
     icon: 'file_copy',
     routerLink: '/documents',
-    disabled: true
+    disabled: true,
+    forAdmin: false
   },
-  { isTitle: true, text: 'Oficina', icon: '', routerLink: '', disabled: false },
+  { isTitle: true, text: 'Oficina', icon: '', routerLink: '', disabled: false, forAdmin: true },
   {
     isTitle: false,
     text: 'Usuarios',
     icon: 'supervisor_account',
     routerLink: '/users',
-    disabled: false
+    disabled: false,
+    forAdmin: true
   },
   {
     isTitle: false,
     text: 'Aux Bancario',
     icon: 'switch_camera',
     routerLink: '/assistant',
-    disabled: false
+    disabled: false,
+    forAdmin: true
   },
 
   {
@@ -50,6 +56,7 @@ export const MenuItems: iSideMenuItem[] = [
     text: 'Aux Caja',
     icon: 'swap_vertical_circle',
     routerLink: '/petty',
-    disabled: false
+    disabled: false,
+    forAdmin: true
   }
 ];

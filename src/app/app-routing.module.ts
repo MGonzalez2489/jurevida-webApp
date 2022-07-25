@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/petty-assistant/petty-assistant.module').then((m) => m.PettyAssistantModule)
       },
 
+      {
+        path: 'finance',
+        loadChildren: () => import('./modules/finance/finance.module').then((m) => m.FinanceModule)
+      },
       { path: '', redirectTo: 'users', pathMatch: 'full' }
     ]
   }

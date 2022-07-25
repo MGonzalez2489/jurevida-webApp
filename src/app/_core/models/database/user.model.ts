@@ -17,4 +17,5 @@ export class UserModel extends BaseModel {
   council?: CouncilProfileModel;
   sponsor?: SponsorProfileModel;
   associated?: AssociateProfileModel;
+  administrator?: {};
 }

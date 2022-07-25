@@ -89,7 +89,7 @@ export class PettySearchComponent implements OnInit, OnDestroy {
     const currentYear = new Date().getFullYear();
     periodSearch.startDate = new Date(currentYear, 0, 1, 0, 0, 0, 0).toLocaleString();
     periodSearch.endDate = new Date(currentYear, 11, 31, 59, 59, 59, 999).toLocaleString();
-    this.movementService.export(this.assistant.publicId, periodSearch).subscribe(
+    this.movementService.export(this.assistant.publicId, this.period.publicId, periodSearch).subscribe(
       (data) => {
         window.open(`${environment.baseUrl}${data.model}`);
       },
@@ -97,7 +97,7 @@ export class PettySearchComponent implements OnInit, OnDestroy {
     );
   }
   exportCurrentSearch(): void {
-    this.movementService.export(this.assistant.publicId, this.search).subscribe(
+    this.movementService.export(this.assistant.publicId, this.period.publicId, this.search).subscribe(
       (data) => {
         window.open(`${environment.baseUrl}${data.model}`);
       },

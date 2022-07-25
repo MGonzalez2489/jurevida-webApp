@@ -96,10 +96,10 @@ export class MovementsService {
 
   // General
 
-  export(assistantId: string, movementSearch: MovementSearchCriteria): Observable<ResultModel<boolean>> {
-    return this.requestService.get<boolean>(`assistant/${assistantId}/movement/export`, movementSearch);
+  export(assistantId: string, periodId: string, movementSearch: MovementSearchCriteria): Observable<ResultModel<boolean>> {
+    const params = { assistantId, periodId, ...movementSearch };
+    return this.requestService.get<boolean>(`movement/export`, params);
   }
-
   delete(publicId: string, isPettyAssistant: boolean): void {
     this.requestService.delete(`movement/${publicId}`).subscribe((data) => {
       if (isPettyAssistant) {

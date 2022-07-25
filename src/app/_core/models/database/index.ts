@@ -9,3 +9,5 @@ export * from './document.model';
 export * from './financial-assistant.model';
 export * from './financial-period.model';
 export * from './financial-movement.model';
+
+export * from './finance-report.model';
