@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserModel } from '@core/models/database';
 
 @Component({
@@ -6,10 +6,8 @@ import { UserModel } from '@core/models/database';
   templateUrl: './profile-associated-info.component.html',
   styleUrls: ['./profile-associated-info.component.scss']
 })
-export class ProfileAssociatedInfoComponent implements OnInit {
+export class ProfileAssociatedInfoComponent {
   @Input()
   user: UserModel = new UserModel();
   constructor() {}
-
-  ngOnInit(): void {}
 }

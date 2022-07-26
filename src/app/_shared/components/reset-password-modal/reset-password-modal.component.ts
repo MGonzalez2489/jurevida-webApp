@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PasswordService, SessionService } from '@core/services';
@@ -9,7 +9,7 @@ import Validation from '@shared/validators/MustMatch';
   templateUrl: './reset-password-modal.component.html',
   styleUrls: ['./reset-password-modal.component.scss']
 })
-export class ResetPasswordModalComponent implements OnInit {
+export class ResetPasswordModalComponent {
   passwordForm: FormGroup = new FormGroup(
     {
       currentPassword: new FormControl(null, [Validators.required]),
@@ -27,8 +27,6 @@ export class ResetPasswordModalComponent implements OnInit {
     public dialogRef: MatDialogRef<ResetPasswordModalComponent>,
     private sessionService: SessionService
   ) {}
-
-  ngOnInit(): void {}
 
   submit(): void {
     if (this.passwordForm.valid) {

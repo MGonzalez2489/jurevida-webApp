@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserModel } from '@core/models/database';
 import { CouncilService } from '../../services/council.service';
@@ -9,7 +9,7 @@ import { AddCouncilContributionComponent } from '../add-council-contribution/add
   templateUrl: './profile-council-info.component.html',
   styleUrls: ['./profile-council-info.component.scss']
 })
-export class ProfileCouncilInfoComponent implements OnInit {
+export class ProfileCouncilInfoComponent {
   displayedColumns: string[] = ['contribution'];
   @Input()
   user: UserModel = new UserModel();
@@ -17,8 +17,6 @@ export class ProfileCouncilInfoComponent implements OnInit {
   @Output()
   update: EventEmitter<boolean> = new EventEmitter();
   constructor(public dialog: MatDialog, private councilService: CouncilService) {}
-
-  ngOnInit(): void {}
 
   addContribution(): void {
     const dialog = this.dialog.open(AddCouncilContributionComponent, { width: '450px', data: { user: this.user } });

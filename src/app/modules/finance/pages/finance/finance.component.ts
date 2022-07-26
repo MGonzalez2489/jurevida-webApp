@@ -35,8 +35,10 @@ export class FinanceComponent implements OnInit {
     this.financeService.getFinanceReport('', isPetty, this.search).subscribe((data) => {
       this.financeReport = data.model;
       this.movements = data.model.movements;
-      this.search.totalPages = this.movements.totalPages;
-      this.search.totalRecords = this.movements.totalRecords;
+      if (this.movements) {
+        this.search.totalPages = this.movements.totalPages;
+        this.search.totalRecords = this.movements.totalRecords;
+      }
     });
   }
   clearSearch(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { SponsorService } from '../../services/sponsor.service';
   templateUrl: './create-sponsor.component.html',
   styleUrls: ['./create-sponsor.component.scss']
 })
-export class CreateSponsorComponent implements OnInit {
+export class CreateSponsorComponent {
   sponsorForm: FormGroup = new FormGroup({
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
@@ -22,10 +22,14 @@ export class CreateSponsorComponent implements OnInit {
     useNickName: new FormControl(false)
   });
 
+  formSubmited: boolean = false;
+  get cForm() {
+    return this.sponsorForm.controls;
+  }
   constructor(private sponsorService: SponsorService, private router: Router) {}
 
-  ngOnInit(): void {}
   submit(): void {
+    this.formSubmited = true;
     if (!this.sponsorForm.valid) {
       return;
     }

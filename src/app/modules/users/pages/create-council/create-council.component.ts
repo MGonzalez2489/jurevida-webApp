@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContributionModel, CouncilProfileModel, UserModel } from '@core/models/database';
 import { CouncilService } from '../../services/council.service';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-council',
   templateUrl: './create-council.component.html',
   styleUrls: ['./create-council.component.scss']
 })
-export class CreateCouncilComponent implements OnInit {
+export class CreateCouncilComponent {
+  formSubmited: boolean = false;
   councilForm: FormGroup = new FormGroup({
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
@@ -20,11 +20,14 @@ export class CreateCouncilComponent implements OnInit {
     address: new FormControl(null),
     contribution: new FormControl(null, [Validators.required])
   });
+  get cForm() {
+    return this.councilForm.controls;
+  }
+
   constructor(private councilService: CouncilService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   submit(): void {
+    this.formSubmited = true;
     if (!this.councilForm.valid) {
       return;
     }
@@ -46,8 +49,7 @@ export class CreateCouncilComponent implements OnInit {
       (data) => {
         this.router.navigate(['/users']);
       },
-      (error) => {
-      }
+      (error) => {}
     );
   }
 }

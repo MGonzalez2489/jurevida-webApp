@@ -66,8 +66,8 @@
           </mat-form-field>
         </div>
 
-        <mat-card class="scroll-x">
-          <div class="d-flex justify-content-center align-items-center m-3" *ngIf="users.model.length == 0">
+        <div class="bg-card br-3 p-3 scroll-x">
+          <div class="d-flex justify-content-center align-items-center m-3" *ngIf="users.model.length === 0">
             {{ global.NO_RECORDS }}
           </div>
           <table
@@ -122,7 +122,7 @@
               [pageSizeOptions]="global.PAGINATION_SIZE"
             ></mat-paginator>
           </div>
-        </mat-card>
+        </div>
       </div>
     </mat-drawer-container>
   </div>

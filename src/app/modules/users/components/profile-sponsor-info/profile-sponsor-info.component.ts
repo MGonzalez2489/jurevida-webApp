@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserModel } from '@core/models/database';
 
 @Component({
@@ -6,11 +6,9 @@ import { UserModel } from '@core/models/database';
   templateUrl: './profile-sponsor-info.component.html',
   styleUrls: ['./profile-sponsor-info.component.scss']
 })
-export class ProfileSponsorInfoComponent implements OnInit {
+export class ProfileSponsorInfoComponent {
   @Input()
   user: UserModel = new UserModel();
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
