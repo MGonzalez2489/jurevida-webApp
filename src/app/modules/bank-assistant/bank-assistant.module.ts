@@ -8,7 +8,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DATE_FORMATS } from '@shared/others/date_formate_provider';
 import { Platform } from '@angular/cdk/platform';
 import { CustomDateAdapter } from '@shared/others/date_adapter';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [AssistantSearchComponent],
@@ -46,9 +47,7 @@ import { CustomDateAdapter } from '@shared/others/date_adapter';
     MatNativeDateModule,
     MatMenuModule
   ],
-  //providers: [
-    //{ provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE, Platform] },
-    //{ provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS }
-  //]
+  providers: [
+  ]
 })
 export class BankAssistantModule {}

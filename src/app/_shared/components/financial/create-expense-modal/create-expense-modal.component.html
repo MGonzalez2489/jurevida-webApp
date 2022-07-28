@@ -16,6 +16,7 @@
       <mat-label>Concepto</mat-label>
       <textarea matInput placeholder="Cantidad" formControlName="concept" rows="4"></textarea>
     </mat-form-field>
+    <p class="text-muted">Los campos marcados con * son requeridos</p>
     <div *ngIf="formSubmited" class="text-center">
       <mat-error *ngIf="cForm['name'].errors && cForm['name'].errors['required']"> Es necesario indicar un nombre.</mat-error>
       <mat-error *ngIf="cForm['amount'].errors">
