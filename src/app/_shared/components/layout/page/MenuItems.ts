@@ -11,6 +11,15 @@ export const MenuItems: iSideMenuItem[] = [
   },
   {
     isTitle: false,
+    text: 'Home',
+    icon: 'home',
+    routerLink: '/home',
+    disabled: false,
+    forAdmin: false
+  },
+
+  {
+    isTitle: false,
     text: 'Sociedad',
     icon: 'group_work',
     routerLink: '/society',

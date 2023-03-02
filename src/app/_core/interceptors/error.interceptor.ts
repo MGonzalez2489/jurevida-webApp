@@ -24,10 +24,15 @@ export class ErrorInterceptor implements HttpInterceptor {
           jurevidaError.error = `${error.error.message}`;
         } else {
           // server-side error
-          jurevidaError.error = error.error;
+          jurevidaError.error = error.error instanceof Object ? error.statusText : error.error;
           jurevidaError.status = error.status;
           jurevidaError.message = error.message;
         }
+
+        if (jurevidaError.error === 'Unknown Error') {
+          jurevidaError.error = 'Ups! Algo salio mal.';
+        }
+
         if (jurevidaError.status !== 401) {
           this.notificationService.openMessage(jurevidaError.error);
         }
