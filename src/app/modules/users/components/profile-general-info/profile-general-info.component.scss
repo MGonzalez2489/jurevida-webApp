@@ -1,0 +1,51 @@
+@import 'color';
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.item {
+  display: flex;
+  padding: 1rem;
+  flex: 1 0 auto;
+  .icon-container {
+    border-radius: 9999px;
+    background-color: rgba($j-psicologia, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    max-width: 2.5rem;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    max-height: 2.5rem;
+    color: $j-psicologia;
+    margin-right: 0.75rem;
+  }
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 11rem;
+    width: 11rem;
+    p {
+      margin: 0px;
+      font-weight: 700;
+    }
+  }
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .items-container {
+    flex-direction: column;
+  }
+  .item {
+    justify-content: start;
+    width: 100%;
+  }
+}

@@ -1,0 +1,33 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    class="associated-panel"
+    (closed)="panelOpenState = false"
+    *ngFor="let a of councilMembers.model"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title class="panel-title">
+        <div class="d-flex">
+          <img [src]="a.avatar" />
+          <div class="d-flex flex-column justify-content-center">
+            <p class="m-0">{{ a.fullName }}</p>
+            <span class="text-muted">{{ a.email }}</span>
+          </div>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description> Miembro desde {{ a.createdAt | date }} </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="panel-container">
+      <table mat-table [dataSource]="a.council!.contributions" class="w-full">
+        <ng-container matColumnDef="contribution">
+          <th mat-header-cell *matHeaderCellDef>Contribuciones {{ (a.council?.contributions)!.length }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.contribution }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

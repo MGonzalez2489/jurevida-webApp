@@ -1,0 +1,35 @@
+<div class="d-flex flex-column expense-modal">
+  <h1>Nuevo {{ global.EXPENSE }}</h1>
+  <p class="text-muted">
+    Monto disponible para retiros : <strong>{{ period.currentAmount | currency }}</strong>
+  </p>
+  <form class="d-flex flex-column" [formGroup]="form" (submit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cantidad</mat-label>
+      <input matInput placeholder="Cantidad" type="number" formControlName="amount" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Concepto</mat-label>
+      <textarea matInput placeholder="Cantidad" formControlName="concept" rows="4"></textarea>
+    </mat-form-field>
+    <p class="text-muted">Los campos marcados con * son requeridos</p>
+    <div *ngIf="formSubmited" class="text-center">
+      <mat-error *ngIf="cForm['name'].errors && cForm['name'].errors['required']"> Es necesario indicar un nombre.</mat-error>
+      <mat-error *ngIf="cForm['amount'].errors">
+        <span *ngIf="cForm['amount'].errors['required']">Es necesario indicar el monto.</span>
+        <span *ngIf="cForm['amount'].errors['min']">El monto minimo es 1.</span>
+        <span *ngIf="cForm['amount'].errors['max']">El monto maximo que dispones para retirar es {{ period.currentAmount | currency }}.</span>
+      </mat-error>
+      <mat-error *ngIf="cForm['concept'].errors && cForm['concept'].errors['required']"> Es necesario indicar el concepto del deposito.</mat-error>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center w-full" mat-dialog-actions>
+      <button mat-button color="primary" type="button" class="me-4 br-100" (click)="cancel()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary" class="br-100">Crear</button>
+    </div>
+  </form>
+</div>

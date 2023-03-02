@@ -14,7 +14,8 @@ export class UserModel extends BaseModel {
   firstLogin: boolean = false;
   avatar: string = '';
 
-  council?: CouncilProfileModel | number;
-  sponsor?: SponsorProfileModel | number;
-  associated?: AssociateProfileModel | number;
+  council?: CouncilProfileModel;
+  sponsor?: SponsorProfileModel;
+  associated?: AssociateProfileModel;
+  administrator?: {};
 }

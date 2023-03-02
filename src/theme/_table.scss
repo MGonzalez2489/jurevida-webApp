@@ -1,3 +1,21 @@
 .table {
   background-color: transparent;
+  width: 100%;
+  table-layout: fixed;
+
+  th,
+  td {
+    overflow: hidden;
+    width: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  th:last-child {
+    width: 66px !important;
+  }
+  td:last-child {
+    width: 10px !important;
+    padding: 0px !important;
+    text-align: center;
+  }
 }

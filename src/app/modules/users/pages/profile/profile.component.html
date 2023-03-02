@@ -1,0 +1,37 @@
+<div class="page">
+  <!--title-->
+  <div class="bg-card">
+    <div class="w-desktop maw-desktop page-title-wrapper d-flex justify-content-between flex-column">
+      <div class="page-title-content">
+        <div class="page-title">
+          <img [src]="user.avatar" alt="avatar" />
+          <div class="d-flex flex-column">
+            <span>{{ user.fullName }}</span>
+            <mat-chip-list>
+              <mat-chip color="accent" class="text-white" selected *ngIf="user.council">Consejo</mat-chip>
+              <mat-chip color="warn" selected *ngIf="user.associated">Asociado</mat-chip>
+              <mat-chip color="primary" selected *ngIf="user.sponsor">Patrocinador</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row align-items-center pe-3">
+        <!--aqui van las opciones-->
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body h-full d-flex justify-content-center">
+    <div class="w-desktop">
+      <div class="profile-container">
+        <div class="profile-general">
+          <app-profile-general-info [user]="user" (update)="update()"></app-profile-general-info>
+        </div>
+        <div class="profile-content" *ngIf="user.council">
+          <app-profile-council-info [user]="user" (update)="update()"></app-profile-council-info>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--aca va el body-->
+</div>

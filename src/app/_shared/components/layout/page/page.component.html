@@ -4,7 +4,7 @@
       #snav
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56"
+      fixedTopGap="64"
       opened="true"
       class="sidenav"
     >
@@ -26,7 +26,7 @@
             <div *ngIf="menu.isTitle" class="title">
               <span>{{ menu.text }}</span>
             </div>
-            <a *ngIf="!menu.isTitle" [routerLink]="menu.routerLink">
+            <a *ngIf="!menu.isTitle" [routerLink]="menu.routerLink" (click)="selectMenu(snav)">
               <div class="text">
                 <mat-icon>{{ menu.icon }}</mat-icon>
                 <span>{{ menu.text }}</span>

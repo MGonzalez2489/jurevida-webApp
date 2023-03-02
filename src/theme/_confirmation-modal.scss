@@ -1,0 +1,35 @@
+@import 'color';
+.confirmation-modal {
+  background-color: transparent;
+  width: 34rem;
+  .mat-dialog-container {
+    border-radius: 1rem;
+    padding: 0px;
+  }
+  .confirmation-text {
+    padding: 2rem;
+    .icon-container {
+      border-radius: 9999px;
+      background-color: rgba($j-tsocial, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      min-width: 2.5rem;
+      max-width: 2.5rem;
+      min-height: 2.5rem;
+      max-height: 2.5rem;
+      color: $j-tsocial;
+      margin-right: 0.75rem;
+    }
+  }
+  .confirmation-options {
+    padding: 1rem;
+    background-color: #eee;
+  }
+
+  .danger-button {
+    background-color: $j-tsocial;
+  }
+}

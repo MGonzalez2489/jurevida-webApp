@@ -1,0 +1,46 @@
+<div class="d-flex flex-column income-modal">
+  <h1>Nuevo {{ global.INCOME }}</h1>
+  <p class="text-muted">Un deposito puede ser asignado a un patrocinador como parte de un donativo.</p>
+  <form class="d-flex flex-column" [formGroup]="form" (submit)="submit()">
+    <mat-checkbox class="mt-2 mb-4" (change)="changeSponsorType()" formControlName="existingSponsor">Patrocinador Registrado</mat-checkbox>
+    <div>
+      <mat-form-field class="w-full" appearance="outline" *ngIf="form.value.existingSponsor">
+        <mat-label>Patrocinador</mat-label>
+        <input type="text" (keyup)="search()" placeholder="Busca al patrocinador" matInput formControlName="sponsor" [matAutocomplete]="auto" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of sponsors" [value]="option">
+            {{ option.fullName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="!form.value.existingSponsor" class="w-full">
+        <mat-label>Patrocinador Unico</mat-label>
+        <input matInput placeholder="Nombre del patrocinador" type="text" formControlName="sponsor" />
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Cantidad</mat-label>
+      <input matInput placeholder="Nombre del Contribuyente" type="number" formControlName="amount" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Concepto</mat-label>
+      <textarea matInput placeholder="Nombre del Contribuyente" formControlName="concept" rows="4"></textarea>
+    </mat-form-field>
+    <div *ngIf="formSubmited" class="text-center">
+      <mat-error *ngIf="cForm['sponsor'].errors && cForm['sponsor'].errors['required']">
+        Es necesario indicar el patrocinador del deposito.</mat-error
+      >
+      <mat-error *ngIf="cForm['amount'].errors">
+        <span *ngIf="cForm['amount'].errors['required']">Es necesario indicar el monto.</span>
+        <span *ngIf="cForm['amount'].errors['min']">El monto minimo es 1.</span>
+      </mat-error>
+      <mat-error *ngIf="cForm['concept'].errors && cForm['concept'].errors['required']"> Es necesario indicar el concepto del deposito.</mat-error>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center w-full" mat-dialog-actions>
+      <button mat-button color="primary" type="button" class="me-4 br-100" (click)="cancel()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary" class="br-100">Crear</button>
+    </div>
+  </form>
+</div>

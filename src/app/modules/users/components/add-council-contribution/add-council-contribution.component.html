@@ -1,0 +1,14 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <form (submit)="submit()" [formGroup]="form">
+    <h1>Nueva contribucion</h1>
+    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</p>
+    <mat-form-field appearance="outline" class="w-full mt-3">
+      <mat-label>Contribucion</mat-label>
+      <textarea matInput placeholder="Descripcion de la contribucion" rows="4" formControlName="contribution"></textarea>
+    </mat-form-field>
+    <div class="d-flex justify-content-center align-items-center w-full mt-3">
+      <button mat-button color="primary" type="button" class="me-4" (click)="dimiss()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary">Guardar</button>
+    </div>
+  </form>
+</div>

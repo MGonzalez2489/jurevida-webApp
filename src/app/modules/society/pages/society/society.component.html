@@ -1,0 +1,45 @@
+<div class="page">
+  <div class="bg-card">
+    <div class="w-desktop maw-desktop page-title-wrapper d-flex justify-content-between">
+      <div class="page-title-content">
+        <div class="page-title d-flex align-items-center">
+          <div class="d-hidden m-visible ps-3">
+            <button mat-icon-button (click)="drawer.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          Sociedad
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body h-full mt-4 d-flex justify-content-center">
+    <mat-drawer-container class="h-full drawer-container" autosize>
+      <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" class="left-side">
+        <mat-selection-list class="list-options" multiple="false" (selectionChange)="filterType($event, drawer)">
+          <mat-list-option value="asociado" class="list-option br-3" selected="true">
+            <mat-icon class="text-primary" mat-list-icon>local_offer</mat-icon>
+            <div mat-line class="text-primary">Asociados</div>
+          </mat-list-option>
+          <mat-list-option value="consejo" class="list-option br-3">
+            <mat-icon class="text-secondary" mat-list-icon>local_offer</mat-icon>
+            <div mat-line class="text-secondary">Consejo</div>
+          </mat-list-option>
+
+          <mat-list-option value="patrocinadores" class="list-option br-3">
+            <mat-icon class="text-danger" mat-list-icon>local_offer</mat-icon>
+            <div mat-line class="text-danger">Patrocinadores</div>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-drawer>
+      <div class="drawer-content">
+        <ng-container [ngSwitch]="renderedComponent">
+          <app-council *ngSwitchCase="'consejo'"></app-council>
+          <app-sponsor *ngSwitchCase="'patrocinadores'"></app-sponsor>
+          <app-associated *ngSwitchCase="'asociado'"></app-associated>
+        </ng-container>
+      </div>
+    </mat-drawer-container>
+  </div>
+</div>

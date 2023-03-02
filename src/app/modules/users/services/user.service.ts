@@ -14,7 +14,11 @@ export class UserService {
   getAll(search: BaseSearchCriteria): Observable<ResultListModel<UserModel>> {
     return this.requestService.getList<UserModel>('users', search);
   }
-  post(user: UserModel): Observable<ResultModel<UserModel>> {
-    return this.requestService.post('users/council', user);
+  getUser(publicId: string): Observable<ResultModel<UserModel>> {
+    return this.requestService.get<UserModel>(`users/${publicId}`);
+  }
+
+  putUser(publicId: string, user: UserModel): Observable<ResultModel<UserModel>> {
+    return this.requestService.put(`users/${publicId}`, { user });
   }
 }

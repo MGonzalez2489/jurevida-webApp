@@ -1,0 +1,32 @@
+.document-card {
+  text-decoration: none;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .icon-wrapper {
+    position: relative;
+    //padding-bottom: calc(6 / 9 * 100%);
+
+    mat-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      min-width: 3.5rem;
+      max-width: 3.5rem;
+      font-size: 3.5rem;
+      line-height: 3.5rem;
+    }
+  }
+  .text-wrapper {
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+}
+
+.relative {
+  position: relative;
+}

@@ -1,4 +1,22 @@
-@import "./color";
+@import './color';
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-lg {
+  font-size: 1rem;
+}
+.text-medium {
+  font-weight: 500 !important;
+}
+.leading-6 {
+  line-height: 1.5rem;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
 
 .text-primary {
   color: $j-psicologia;
@@ -12,9 +30,12 @@
 .text-danger {
   color: $j-tsocial;
 }
+.text-white {
+  color: #fff;
+}
 
 .text-muted {
-  color: rgba(33, 37, 41, 0.75) !important;
+  color: rgba(33, 37, 41, 0.65) !important;
 }
 .text-center {
   text-align: center;

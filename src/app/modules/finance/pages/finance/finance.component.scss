@@ -1,0 +1,13 @@
+@import 'color';
+
+.active {
+  background-color: $j-psicologia;
+  color: #fff;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0;
+}
+
+//cards & content

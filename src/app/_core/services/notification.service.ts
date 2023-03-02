@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarConfig,
-  MatSnackBarHorizontalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { GLOBAL } from '@global/globals';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class NotificationService {
   private snackNotification$: Subject<string> = new Subject();
   private sbConfig: MatSnackBarConfig;
   private horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  private snacBarAutoHide = '2000';
+  private snacBarAutoHide = GLOBAL.NOTIFICATION_DURATION;
 
   constructor(private snackBar: MatSnackBar) {
     this.sbConfig = new MatSnackBarConfig();

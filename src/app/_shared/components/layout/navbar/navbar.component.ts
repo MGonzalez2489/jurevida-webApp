@@ -1,33 +1,37 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserModel } from '@core/models/database';
 import { SessionService } from '@core/services';
+import { ResetPasswordModalComponent } from '@shared/components/reset-password-modal/reset-password-modal.component';
 import { iPage } from '@shared/interfaces/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnDestroy {
   @Output()
   toggleSideBar: EventEmitter<any> = new EventEmitter();
 
+  userSuscription: Subscription;
   page: iPage = {
     title: ''
     //error: '',
   };
   user: UserModel = new UserModel();
 
-  constructor(private sessionService: SessionService, private router: Router, private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private sessionService: SessionService, private router: Router, private dialog: MatDialog) {
     this.loadSessionInfo();
-    this.sessionService.getCurrentSession().subscribe((data) => {
+    this.userSuscription = this.sessionService.getCurrentSession().subscribe((data) => {
       this.user = data.user;
     });
   }
-  ngOnInit(): void {}
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.userSuscription.unsubscribe();
+  }
   emitToggleSideBar(): void {
     this.toggleSideBar.emit(null);
   }
@@ -42,6 +46,6 @@ export class NavbarComponent implements OnInit {
     }
   }
   openModal(): void {
-    //this.dialog.open(ResetPasswordModalComponent);
+    this.dialog.open(ResetPasswordModalComponent, { disableClose: true });
   }
 }

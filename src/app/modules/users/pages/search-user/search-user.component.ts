@@ -24,6 +24,7 @@ export class SearchUserComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   currentUser: UserModel;
   showFiller = true;
+  searchKeyword: string = '';
   private _mobileQueryListener: () => void;
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private userService: UserService, private sessionService: SessionService) {
     this.mobileQuery = media.matchMedia('(max-width:600px)');
@@ -45,7 +46,6 @@ export class SearchUserComponent implements OnInit, OnDestroy {
         this.users = data;
         this.search.totalPages = data.totalPages;
         this.search.totalRecords = data.totalRecords;
-        console.log('users', this.users);
       },
       (error) => {}
     );
@@ -65,6 +65,12 @@ export class SearchUserComponent implements OnInit, OnDestroy {
     this.loadUsers();
     if (this.mobileQuery.matches) {
       sideBar.toggle();
+    }
+  }
+  searchByKeyword() {
+    if (this.searchKeyword != this.search.keyword) {
+      this.search.keyword = this.searchKeyword;
+      this.loadUsers();
     }
   }
 }

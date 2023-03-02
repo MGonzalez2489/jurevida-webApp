@@ -57,9 +57,25 @@
               <textarea matInput rows="5" placeholder="Contribucion" formControlName="contribution"></textarea>
             </mat-form-field>
 
+            <div *ngIf="formSubmited" class="text-center text-warning">
+              <mat-error *ngIf="cForm['firstName'].errors && cForm['firstName'].errors['required']">El nombre es requerido.</mat-error>
+              <mat-error *ngIf="cForm['lastName'].errors && cForm['lastName'].errors['required']">El apellido es requerido.</mat-error>
+              <mat-error *ngIf="cForm['email'].errors">
+                <span *ngIf="cForm['email'].errors['required']">El email es requerido.</span>
+                <span *ngIf="cForm['email'].errors['email']">El formato del email es incorrecto.</span>
+              </mat-error>
+              <mat-error *ngIf="cForm['phone'].errors">
+                <span *ngIf="cForm['phone'].errors['required']">El telefono es requerido.</span>
+                <span *ngIf="cForm['phone'].errors['mask']">El formato del telefono es incorrecto.</span>
+              </mat-error>
+              <mat-error *ngIf="cForm['contribution'].errors && cForm['contribution'].errors['required']"
+                >Es necesario indicar una contribucion.</mat-error
+              >
+            </div>
+
             <div class="d-flex justify-content-center align-items-center w-full mt-5">
-              <button mat-button color="primary" type="button" class="me-4" routerLink="/users">Cancelar</button>
-              <button type="submit" mat-raised-button color="primary">Guardar</button>
+              <button mat-button color="primary" type="button" class="me-4 br-100" routerLink="/users">Cancelar</button>
+              <button type="submit" class="br-100" mat-raised-button color="primary">Guardar</button>
             </div>
           </form>
         </mat-card-content>

@@ -1,0 +1,75 @@
+@import 'color';
+.associated-panel {
+  .mat-expansion-panel-header {
+    padding: 1rem;
+  }
+  .mat-expansion-panel-header-title {
+    width: 40%;
+  }
+  .panel-title {
+    p {
+      font-weight: 700;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 9999px;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.panel-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  .item {
+    display: flex;
+    padding: 1rem;
+    flex: 1 0 33%;
+    .icon-container {
+      border-radius: 9999px;
+      background-color: rgba($j-medicina, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.5rem;
+      min-width: 2.5rem;
+      max-width: 2.5rem;
+      height: 2.5rem;
+      min-height: 2.5rem;
+      max-height: 2.5rem;
+      color: $j-medicina;
+      margin-right: 0.75rem;
+    }
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        margin: 0px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .panel-header {
+    .panel-title {
+      h4 {
+        display: none;
+      }
+    }
+  }
+
+  .panel-container {
+    display: column;
+
+    .item {
+      flex: 1 0 100%;
+    }
+  }
+}
