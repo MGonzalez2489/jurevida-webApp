@@ -14,7 +14,7 @@ export class NotificationService {
 
   constructor(private snackBar: MatSnackBar) {
     this.sbConfig = new MatSnackBarConfig();
-    this.sbConfig.duration = parseInt(this.snacBarAutoHide, 0);
+    this.sbConfig.duration = parseInt(this.snacBarAutoHide, 100);
     this.sbConfig.horizontalPosition = this.horizontalPosition;
     this.showMessage();
   }
@@ -26,5 +26,8 @@ export class NotificationService {
   }
   openMessage(message: string) {
     this.snackNotification$.next(message);
+  }
+  closeMessage() {
+    this.snackBar.dismiss();
   }
 }

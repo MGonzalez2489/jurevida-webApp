@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { NotificationService } from '@core/services';
 
 @Injectable()
 export class FormatRequestInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private notificationService: NotificationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.notificationService.closeMessage();
     const newRequest = request.clone({
       params: request.params ? this.removeNullValuesFromQueryParams(request.params) : request.params,
       body: request.body ? this.deleteEmptyPropsFromBody(request.body) : request.body
