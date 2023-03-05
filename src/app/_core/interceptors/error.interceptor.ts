@@ -3,7 +3,6 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { catchError, Observable, throwError } from 'rxjs';
 import { iError } from '@shared/interfaces';
 import { NotificationService } from '@core/services';
-import { environment } from '@environment/environment';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -24,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           jurevidaError.error = `${error.error.message}`;
         } else {
           // server-side error
-          jurevidaError.error = error.error instanceof Object ? error.statusText : error.error;
+          jurevidaError.error = error.error instanceof Object ? error.error.message : error.error;
           jurevidaError.status = error.status;
           jurevidaError.message = error.message;
         }
@@ -37,9 +36,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.notificationService.openMessage(jurevidaError.error);
         }
 
-        if (!environment.production) {
-          console.log('Request Error', jurevidaError);
-        }
+        console.log('Interceptor: Request Error', jurevidaError);
         return throwError(jurevidaError);
       })
     );
