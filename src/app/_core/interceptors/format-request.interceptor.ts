@@ -28,7 +28,7 @@ export class FormatRequestInterceptor implements HttpInterceptor {
     const paramsKeysAux = params.keys();
     paramsKeysAux.forEach((key) => {
       const value = params.get(key);
-      if (value === null || value === undefined || value === '') {
+      if (value === null || value === undefined || value === '' || value === 'null') {
         params['map'].delete(key);
       }
     });

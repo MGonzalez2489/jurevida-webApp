@@ -81,7 +81,8 @@ export class PettySearchComponent implements OnInit, OnDestroy {
   }
 
   searchMovement(): void {
-    this.movementService.searchBankMovements(this.search);
+    //this.movementService.searchBankMovements(this.search);
+    this.movementService.searchPettyMovements(this.search);
   }
 
   exportCurrentPeriod(): void {
@@ -105,6 +106,14 @@ export class PettySearchComponent implements OnInit, OnDestroy {
     );
   }
 
+  clearSearch(): void {
+    this.search.type = '';
+    this.search.startDate = '';
+    this.search.endDate = '';
+    this.search.name = '';
+    this.search.concept = '';
+    this.searchMovement();
+  }
   delete(movement: FinancialMovementModel): void {
     const movementType = movement.type == 'income' ? this.global.INCOME : this.global.EXPENSE;
     const title = `Desea eliminar este ${movementType}?`;
